@@ -3,19 +3,11 @@ import React from 'react'
 export const Footer = () => {
   return (
     <>
-     <div className="footer" style={{backgroundImage:"url('assets/img/footer-bg.png')"}}>
+    {/* style={{backgroundImage:"url('assets/img/footer-bg.png')"}} */}
+     <div className="footer" style={{background: "#6A35FF"}}>
         <div className="container">
-
-            <div className="fdot-one">
-                <img src="assets/img/footert-boll-1.png" alt=""/>
-            </div>
-            
-            <div className="fdot-two">
-                <img src="assets/img/footert-boll-1.png" alt=""/>
-            </div>
-
             <div className="col-12">
-                <div className="subscribe-content"  style={{backgroundImage:"url('assets/img/subscribe-bg.png')"}}>
+                {/* <div className="subscribe-content"  style={{backgroundImage:"url('assets/img/subscribe-bg.png')"}}>
                     <div className="content wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s">
                         <h3 className="title">Get latest crypto news</h3>
                         <p className="text">Subscribe to our newsletter for regular updates.</p>
@@ -32,7 +24,7 @@ export const Footer = () => {
                             </div>
                         </form>
                     </div>
-                </div>
+                </div> */}
             </div>
             <div className="row justify-content-between">
                 <div className="col-lg-12 col-md-6 wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s">

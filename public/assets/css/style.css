@@ -833,7 +833,7 @@ p.text {
 
 /* Footer Start */
 .footer {
-  margin-top: 120px;
+  /* margin-top: 120px; */
   padding: 20px 0px 0px;
   background-size: cover;
   background-position: top center;
@@ -988,7 +988,7 @@ p.text {
   font-size: 18px;
   line-height: 28px;
   font-weight: 400;
-  color: #b9adf0;
+  color: #ffffff;
 }
 .footer .footer-bottom .content p a {
   font-family: "Open Sans", sans-serif;
@@ -1003,7 +1003,7 @@ p.text {
 .footer .footer-bottom .social-style a {
   margin-left: 15px;
   background-color: #4f27eb;
-  color: #8c99d6;
+  color: #ffffff;
   width: 40px;
   height: 40px;
   border-radius: 50%;

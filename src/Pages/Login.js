@@ -1,10 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Footer } from '../Components/Footer'
 import { Navbar } from '../Components/Navbar'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {MdEmail} from 'react-icons/md'
 import { Link } from 'react-router-dom'
+
+
+
 export const Login = () => {
+
+  const [formData, setFormdata] = useState({})
+
+  const getInputs = (value,name)=>{
+    console.log(value,name);
+    const data = {[name]: value}
+    setFormdata({...formData, ...data})
+  }
+
   return (
    <>
     <Navbar />
@@ -19,13 +31,13 @@ export const Login = () => {
           <form>
             <div className="input">
               <i className=""><MdEmail/></i>
-              <input type="email" placeholder="Email" />
+              <input type="email" placeholder="Email" name='email' onChange={(event)=>{getInputs(event.target.value, event.target.name)}}/>
             </div>
             <div className="input">
               <i className=""><RiLockPasswordFill/></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Password" name='password' onChange={(event)=>{getInputs(event.target.value, event.target.name)}}/>
             </div>
-            <input className="signup-btn" type="submit" value="SIGN UP" />
+            <input className="signup-btn" type="submit" value="LOGIN" />
           </form>
           <p>Don't have an account? <Link to="/signup">sign up</Link></p>
             </div>

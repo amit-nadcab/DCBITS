@@ -3,6 +3,7 @@ import './App.css';
 import { Home } from './Pages/Home';
 import { Signup } from './Pages/Signup';
 import { Login } from "./Pages/Login";
+import { Dashboard } from "./Pages/Dashboard";
 
 
 
@@ -19,6 +20,10 @@ function App() {
     {
       path: "/login",
       element: <Login/>
+    },
+    {
+      path: "/dashboard",
+      element: <Dashboard/>
     }
   ]);
   return (

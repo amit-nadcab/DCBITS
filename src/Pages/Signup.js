@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Footer } from '../Components/Footer'
 import { Navbar } from '../Components/Navbar'
 import { RiUserFill, RiLockPasswordFill } from 'react-icons/ri'
 import { MdEmail } from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link, useLocation} from 'react-router-dom'
 
 export const Signup = () => {
+
+  const location  = useLocation()
+
   const [formData, setFormDate] = useState({})
   const [showOtp, setShowOtp] = useState(true)
 
@@ -13,6 +16,14 @@ export const Signup = () => {
     const data = { [name]: value }
     setFormDate({ ...formData, ...data })
   }
+
+  useEffect(()=>{
+    console.log(location?.search.slice(7));
+    setFormDate({...formData,refID:location?.search.slice(7)})
+  },[])
+
+  console.log(formData);
+  
 
   return (
     <>
@@ -32,7 +43,7 @@ export const Signup = () => {
               <form>
                 <div className="input">
                   <i className=""><RiUserFill /></i>
-                  <input type="text" name="refID" placeholder="Referral ID" onChange={(event) => getInputs(event.target.value, event.target.name)}/>
+                  <input type="text" name="refID" placeholder="Referral ID" value={formData?.refID} onChange={(event) => getInputs(event.target.value, event.target.name)}/>
                 </div>
                 <div className="input">
                   <i className=""><MdEmail /></i>

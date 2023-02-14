@@ -3,12 +3,14 @@ import { Footer } from '../Components/Footer'
 import { Navbar } from '../Components/Navbar'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {MdEmail} from 'react-icons/md'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 
 
 
 export const Login = () => {
 
+  const navigate = useNavigate()
   const [formData, setFormdata] = useState({})
 
   const getInputs = (value,name)=>{
@@ -37,7 +39,7 @@ export const Login = () => {
               <i className=""><RiLockPasswordFill/></i>
               <input type="password" placeholder="Password" name='password' onChange={(event)=>{getInputs(event.target.value, event.target.name)}}/>
             </div>
-            <input className="signup-btn" type="submit" value="LOGIN" />
+            <input className="signup-btn" type="submit" value="LOGIN" onClick={()=>navigate('/dashboard')}/>
           </form>
           <p>Don't have an account? <Link to="/signup">sign up</Link></p>
             </div>

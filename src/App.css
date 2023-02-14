@@ -107,4 +107,30 @@ a {
 
 .page-wrapper{
     min-height: 89vh;
+    background: linear-gradient(178deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%);
 }
+
+.dummy-data{
+    border: 1px solid rgba(240, 238, 238, 0.418);
+    border-radius: 10px;
+    height: 100px;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+    background-color: #d7d6d64d;
+    color: #ffffffd8;
+}
+
+.dummy-data-1{
+    border: 1px solid rgba(255, 255, 255, 0.418);
+    border-radius: 10px;
+    height: 350px;
+    /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
+    background-color: #d7d6d64d;
+    color: #ffffff;
+}
+
+.amount-value{
+    color: #e9e7e7;
+    
+}
+
+

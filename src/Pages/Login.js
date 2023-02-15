@@ -6,8 +6,6 @@ import {MdEmail} from 'react-icons/md'
 import { Link, useNavigate } from 'react-router-dom'
 
 
-
-
 export const Login = () => {
 
   const navigate = useNavigate()

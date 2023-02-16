@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { Footer } from '../Components/Footer'
 import { Navbar } from '../Components/Navbar'
 import {RiLockPasswordFill} from 'react-icons/ri'
@@ -11,7 +11,7 @@ import { login } from '../utils/apiFunction'
 export const Login = () => {
 
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
   const [formData, setFormdata] = useState({})
   const [showEmailError, setShowEmailError] = useState(false)
   const [passwordError, setShowPasswordError] = useState(false)

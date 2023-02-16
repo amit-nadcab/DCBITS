@@ -122,10 +122,16 @@ a {
 .dummy-data-1{
     border: 1px solid rgba(255, 255, 255, 0.418);
     border-radius: 30px;
-    height: 350px;
+    /* height: 350px; */
     /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
     background-color: #d7d6d64d;
     /* color: #ffffff; */
+}
+
+@media only screen and (max-width:992px){
+  .deposit_img {
+    display:none
+  }
 }
 
 .amount-value{

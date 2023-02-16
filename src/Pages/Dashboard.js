@@ -1,12 +1,14 @@
 import React from 'react'
 import { Footer } from '../Components/Footer'
 import { Sidebar } from '../Components/Sidebar'
+import { AiFillCopy } from 'react-icons/ai'
+import {createWallet} from '../utils/apiFunction'
 
 export const Dashboard = () => {
     return (
         <>
             {/* <Navbar /> */}
-                <Sidebar/>
+            <Sidebar />
             <div className='page-wrapper pt-5'>
                 <div className='container pt-5'>
                     <div className='row pt-5'>
@@ -51,44 +53,31 @@ export const Dashboard = () => {
                     <div className='row mt-5'>
                         <div className='col-md-6 pt-2'>
                             <div className='dummy-data-1'>
-                                <h4 className='text-center mt-2 text-warning'>Deposit</h4>
-                                {/* <div className='text-center'>
-                                    <img src='/assets/img/depsot.webp' width="200px" height="200px" />
-                                </div>
-                                <div className='d-flex flex-column w-50 mx-auto'>
-                            <input type="text"/>
-                            <button>Deposit</button>
-                             <form>
-                                    <div className="input">
-                                        <i className="">q</i>
-                                        <input type="text" placeholder="USDT" name='email' />
-                                    </div>
-                                    <input className="signup-btn" type="submit" value="Deposit" />
-                                </form>
-                            </div> */}
+                                <h4 className='text-center mt-2 text-warning'>Wallet</h4>
                                 <div className='row'>
-                                    <div className='col-md-5'>
+                                    <div className='col-lg-5'>
                                         <div className='text-center'>
-                                            <img src='/assets/img/depsot.webp' width="250px" height="250px" />
+                                            <img className='img-fluid deposit_img' src='/assets/img/depsot.webp'  alt='' />
                                         </div>
                                     </div>
-                                    <div className='col-md-6'>
-                                        <div className='d-flex flex-column mt-4'>
-                                            <p className='fs-6 text-warning font-weight-bold'>USDT Balance :  <span className='text-white font-weight-light'> 50 USDT</span></p>
-                                            <p className='fs-6 text-warning font-weight-bold'>DCBT Balance : <span className='text-white font-weight-light'> 50 DCBT</span></p>
-                                        </div>
-                                        <form>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">USDT Amount</label>
-                                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter USDT Amount"/>
-                                                    <small id="emailHelp" class="form-text text-muted">Min 100 USDT Max 100000 USDT</small>
+                                    <div className='col-lg-6 m-auto'>
+                                        <div className='card bg-transparent border-0'>
+                                            <div className='card-body'>
+                                                <div className='d-flex align-items-center justify-content-center' style={{minHeight
+                                                :'20vh'}} >
+                                                    <span className='btn btn-primary' onClick={()=> createWallet()}>Create Wallet</span>
+
+                                                </div>
+                                                {/* <div className='mt-4'>
+                                                    <h6 className='text-warning'><b> USDT Wallet Address</b></h6>
+                                                    <p className='text-white'>TBfRabVPjU36MU2wGc3aDdpDZJzovLr4eF <AiFillCopy/></p> 
+                                                </div>
+                                                <div className='mt-4'>
+                                                <h6 className='text-warning'><b> DCBT Wallet Address</b></h6>
+                                                <p className='text-white'>TBfRabVPjU36MU2wGc3aDdpDZJzovLr4eF <AiFillCopy/></p> 
+                                                </div> */}
                                             </div>
-                                            {/* <div class="form-group">
-                                                <label for="exampleInputPassword1">Password</label>
-                                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password"/>
-                                            </div> */}
-                                            <button type="submit" class="btn btn-primary">Deposit</button>
-                                        </form>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -107,3 +96,4 @@ export const Dashboard = () => {
         </>
     )
 }
+

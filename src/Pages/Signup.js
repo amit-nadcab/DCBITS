@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 
 import { Footer } from "../Components/Footer";
 import { Navbar } from "../Components/Navbar";
@@ -7,7 +7,7 @@ import { Navbar } from "../Components/Navbar";
 import { RiUserFill, RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
 import { BiHide, BiShow } from "react-icons/bi";
-
+import { toast } from "react-toastify";
 import { registration } from "../utils/apiFunction";
 
 const initialTodos = {
@@ -20,20 +20,30 @@ const reducer = (state, action) => {
     return {
       handleShowP: !state?.handleShowP,
     };
-  } else if (action.type === "HANDLE_SHOW_CP") {
+  }
+  if (action.type === "HANDLE_SHOW_CP") {
     return {
       handleShowCP: !state?.handleShowCP,
     };
   }
 
+
   throw Error("Unknown action.");
 };
 
 export const Signup = () => {
+
   const location = useLocation();
+  const navigate = useNavigate()
+
   const [todos, dispatch] = useReducer(reducer, initialTodos);
   const [formData, setFormDate] = useState({});
   const [showOtp, setShowOtp] = useState(true);
+
+  // const [showRefIDError, setShowRefIDError] = useState(false)
+  const [showEmailError, setShowEmailError] = useState(false)
+  const [showPasswordError, setShowPasswordError] = useState(false)
+  const [showCPasswordErrorError, setShowCPasswordError] = useState(false)
 
   const getInputs = (value, name) => {
     const data = { [name]: value };
@@ -41,7 +51,6 @@ export const Signup = () => {
   };
 
   useEffect(() => {
-    // console.log(location?.search.slice(7));
     setFormDate({ ...formData, refID: location?.search.slice(7) });
   }, []);
 
@@ -53,8 +62,6 @@ export const Signup = () => {
 
       <div className=" mx-auto signup-form-page page-wrapper">
         <div className=" mx-auto mt-5 mb-5">
-          {showOtp ? (
-            // Registration form
             <div className="container">
               <div className="col-md-5 signup-form mx-auto">
                 <div className="header">
@@ -82,6 +89,8 @@ export const Signup = () => {
                         );
                       }}
                     />
+                    {/* {showRefIDError ? <p className="text-danger text-start mt-1">Enter Referral ID</p> : null} */}
+
                   </div>
                   <div className="input">
                     <i className="">
@@ -92,11 +101,21 @@ export const Signup = () => {
                       name="email"
                       placeholder="Email"
                       onChange={(event) => {
-                        //  const re =  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                        //  console.log(re.test(event.target.value))
                         getInputs(event.target.value, event.target.name);
                       }}
+                      onBlur={() => {
+                        const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        const t = re.test(formData?.email)
+                        if (t) {
+                          setShowEmailError(false)
+                        } else {
+                          setShowEmailError(true)
+                        }
+                      }}
+                      onFocus={() => setShowEmailError(false)}
                     />
+
+                    {showEmailError ? <p className="text-danger text-start mt-1">Enter Valid Email ID</p> : null}
                   </div>
                   <div className="input position-relative">
                     <i className="">
@@ -107,12 +126,24 @@ export const Signup = () => {
                       name="password"
                       placeholder="Password"
                       onChange={(event) => {
-                        // const re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
-                        // console.log(re.test(event.target.value),event.target.value);
-
                         getInputs(event.target.value, event.target.name);
                       }}
+                      onBlur={() => {
+                        const re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,16}$/;
+                        const t = re.test(formData?.password)
+                        if (t) {
+                          setShowPasswordError(false)
+                        } else {
+                          setShowPasswordError(true)
+                        }
+                      }}
+                      onFocus={() => setShowPasswordError(false)}
                     />
+                    {showPasswordError ? (<>
+                      <p className="text-danger text-start mt-1">Enter Valid Password</p>
+                    </>
+                    ) : null}
+
                     <BiHide
                       className="position-absolute show-hide"
                       onClick={() => {
@@ -132,7 +163,18 @@ export const Signup = () => {
                       onChange={(event) =>
                         getInputs(event.target.value, event.target.name)
                       }
+                      onBlur={() => {
+                        console.log();
+                        if (formData?.cPassword === '' || formData?.cPassword === undefined) {
+                          setShowCPasswordError(true)
+                        } else {
+                          setShowCPasswordError(false)
+                        }
+                      }}
+                      onFocus={() => setShowCPasswordError(false)}
                     />
+                    {showCPasswordErrorError ? <p className="text-danger text-start mt-1">Enter Confirm Password</p> :null}
+
                     <BiHide
                       className="position-absolute show-hide"
                       onClick={() => {
@@ -145,13 +187,41 @@ export const Signup = () => {
                     className="signup-btn"
                     type="button"
                     value="SIGN UP"
-                    onClick={() =>
-                      registration(
-                        formData?.refID,
-                        formData?.email,
-                        formData?.password,
-                        formData?.cPassword
-                      )
+                    onClick={() => {
+                      console.log(formData,"kk");
+
+                      if(formData?.password === '' || formData?.password === undefined){
+                        setShowPasswordError(true)
+                      }
+                      if(formData?.cPassword === '' || formData?.cPassword === undefined){
+                        setShowCPasswordError(true)
+                      }
+                      if(formData?.email === '' || formData?.email === undefined){
+                        setShowEmailError(true)
+                      }
+if ((formData?.password !== '' && formData?.password !== undefined) && (formData?.cPassword !== '' && formData?.cPassword !== undefined) &&(formData?.email !== '' && formData?.email !== undefined)) {
+                        registration(
+                          formData?.refID,
+                          formData?.email,
+                          formData?.password,
+                          formData?.cPassword,
+                          navigate
+                        ).then((res)=>{
+                          console.log(res,"aaa");
+                          console.log(res?.params?.user_id, "response");
+                          
+                          if(res?.params?.user_id){
+                            navigate('/verifyEmail',{state:{user_id :res?.params?.user_id}})
+                            toast.info("OTP is Shared on Email")
+                          }
+                        }).catch((err)=>{
+                          console.log(err,"amit error");  
+                        })
+
+                      } else {
+                        toast.error("Fill complete form")
+                      }
+                    }
                     }
                   />
                 </form>
@@ -160,33 +230,6 @@ export const Signup = () => {
                 </p>
               </div>
             </div>
-          ) : (
-            // OTP form
-            <div className="container">
-              <div className="col-md-5 signup-form mx-auto">
-                <div className="header">
-                  <h1>Verify Email</h1>
-                  <p>Enter OTP </p>
-                </div>
-                <form>
-                  <div className="input">
-                    <i className="">
-                      <RiUserFill />
-                    </i>
-                    <input
-                      type="text"
-                      name="refID"
-                      placeholder="Enter OTP"
-                      onChange={(event) =>
-                        getInputs(event.target.value, event.target.name)
-                      }
-                    />
-                  </div>
-                  <input className="signup-btn" type="submit" value="Verify" />
-                </form>
-              </div>
-            </div>
-          )}
         </div>
       </div>
       <Footer />

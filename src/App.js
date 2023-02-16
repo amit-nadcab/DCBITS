@@ -3,9 +3,11 @@ import "./App.css";
 import { Home } from "./Pages/Home";
 import { Signup } from "./Pages/Signup";
 import { Login } from "./Pages/Login";
+import { VerifyEmail } from "./Pages/VerifyEmail";
 import { Dashboard } from "./Pages/Dashboard";
 
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const router = createBrowserRouter([
@@ -20,6 +22,10 @@ function App() {
     {
       path: "/login",
       element: <Login />,
+    },
+    {
+      path: "/verifyEmail",
+      element: <VerifyEmail />,
     },
     {
       path: "/dashboard",

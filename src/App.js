@@ -5,6 +5,8 @@ import { Signup } from "./Pages/Signup";
 import { Login } from "./Pages/Login";
 import { VerifyEmail } from "./Pages/VerifyEmail";
 import { Dashboard } from "./Pages/Dashboard";
+import { InvestHistory } from "./Pages/InvestHistory";
+import { WithdrawHistory } from "./Pages/WithdrawHistory";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,6 +33,14 @@ function App() {
       path: "/dashboard",
       element: <Dashboard />,
     },
+    {
+      path: "/investHistory",
+      element: <InvestHistory/>
+    },
+    {
+      path: "/withdrawHistory",
+      element: <WithdrawHistory/>
+    }
   ]);
   return (
     <>

@@ -14,14 +14,14 @@ export const Dashboard = () => {
   const [copiedDCBT, setCopiedDCBT] = useState(false);
   // console.log(user_id,);
 
-  console.log(user_id,"useruseruseruseruseruser");
+  console.log(user_id, "useruseruseruseruseruser");
   // console.log(user?.user_id,"USEUUSERUSERUSER");
   useEffect(() => {
     getWalletAddress(user_id).then((res) => {
       setWalletAddress(res?.wallets)
     })
-    updateWallet(user_id).then((res)=>{
-      console.log(res,"update wallet address");
+    updateWallet(user_id).then((res) => {
+      console.log(res, "update wallet address");
     })
   }, [user_id])
 
@@ -113,56 +113,54 @@ export const Dashboard = () => {
                         {
                           walletAddress && walletAddress?.length > 0 ? (
                             <>
-                        <div className='mt-4'>
-                          <h6 className='text-warning'><b>{walletAddress[0]?.wallet_type} Wallet Address</b></h6>
-                          <p className='text-white'>{walletAddress[0]?.wallet_address.slice(0, 10) + "..." + walletAddress[0]?.wallet_address.slice(25)}
-                            <CopyToClipboard
-                              text={walletAddress[0]?.wallet_address}
-                              onCopy={() => handleCopy(walletAddress[0]?.wallet_type)}
+                              <div className='mt-4'>
+                                <h6 className='text-warning'><b>{walletAddress[0]?.wallet_type} Wallet Address</b></h6>
+                                <p className='text-white'>{walletAddress[0]?.wallet_address.slice(0, 10) + "..." + walletAddress[0]?.wallet_address.slice(25)}
+                                  <CopyToClipboard
+                                    text={walletAddress[0]?.wallet_address}
+                                    onCopy={() => handleCopy(walletAddress[0]?.wallet_type)}
 
-                            >
-                              <span className="mx-1 small"><AiOutlineCopy color="white" cursor="pointer" /></span>
-                            </CopyToClipboard>
-                            {copiedUSDT  ? <span className="small mx-1">Copied</span> : null}
-                          </p>
-                        </div>
+                                  >
+                                    <span className="mx-1 small"><AiOutlineCopy color="white" cursor="pointer" /></span>
+                                  </CopyToClipboard>
+                                  {copiedUSDT ? <span className="small mx-1">Copied</span> : null}
+                                </p>
+                              </div>
 
-                        <div className='mt-4'>
-                          <h6 className='text-warning'><b>{walletAddress[1]?.wallet_type} Wallet Address</b></h6>
-                          <p className='text-white'>{walletAddress[1]?.wallet_address.slice(0, 10) + "..." + walletAddress[1]?.wallet_address.slice(25)}
-                            <CopyToClipboard
-                              text={walletAddress[1]?.wallet_address}
-                              onCopy={() => handleCopy(walletAddress[1]?.wallet_type)}
-                            >
-                              <span className="mx-1 small"><AiOutlineCopy color="white" cursor="pointer" /></span>
-                            </CopyToClipboard>
-                            {copiedDCBT ? <span className="small mx-1">Copied</span> : null}
-                          </p>
-                        </div>
+                              <div className='mt-4'>
+                                <h6 className='text-warning'><b>{walletAddress[1]?.wallet_type} Wallet Address</b></h6>
+                                <p className='text-white'>{walletAddress[1]?.wallet_address.slice(0, 10) + "..." + walletAddress[1]?.wallet_address.slice(25)}
+                                  <CopyToClipboard
+                                    text={walletAddress[1]?.wallet_address}
+                                    onCopy={() => handleCopy(walletAddress[1]?.wallet_type)}
+                                  >
+                                    <span className="mx-1 small"><AiOutlineCopy color="white" cursor="pointer" /></span>
+                                  </CopyToClipboard>
+                                  {copiedDCBT ? <span className="small mx-1">Copied</span> : null}
+                                </p>
+                              </div>
                             </>
-                          ) : 
-                          <div
-                          className="d-flex align-items-center justify-content-center"
-                          style={{ minHeight: "20vh" }}
-                        >
-                          <span
-                            className="btn btn-primary"
-                            onClick={() =>
-                              createWallet(user_id).then((res) => {
-                                console.log(res, "wallet Response create");
-                                getWalletAddress(user_id).then((res1)=>{
-                                  setWalletAddress(res1?.wallets)
-                                })
-                               
-                              })
-                            }
-                          >
-                            Create Wallet
-                          </span>
-                        </div>
+                          ) :
+                            <div
+                              className="d-flex align-items-center justify-content-center"
+                              style={{ minHeight: "20vh" }}
+                            >
+                              <span
+                                className="btn btn-primary"
+                                onClick={() =>
+                                  createWallet(user_id).then((res) => {
+                                    console.log(res, "wallet Response create");
+                                    getWalletAddress(user_id).then((res1) => {
+                                      setWalletAddress(res1?.wallets)
+                                    })
+
+                                  })
+                                }
+                              >
+                                Create Wallet
+                              </span>
+                            </div>
                         }
-                        
-                        
                       </div>
                     </div>
                   </div>
@@ -172,6 +170,40 @@ export const Dashboard = () => {
             <div className="col-md-6 pt-2">
               <div className="dummy-data-1">
                 <h4 className="text-center mt-3 text-warning">Withdraw</h4>
+                <div className="card bg-transparent border-0" style={{ minHeight: "20vh" }}>
+                  <div className="card-body my-auto">
+                    <div className="row mt-2">
+                      <div className="col-5 text-warning">
+                        Enter Wallet Address
+                      </div>
+                      <div className="col-7">
+                        <input className="form-control"/>
+                      </div>
+                    </div>
+                    <div className="row mt-2">
+                      <div className="col-5 text-warning">
+                        Enter Amount
+                      </div>
+                      <div className="col-7">
+                        <input className="form-control"/>
+                      </div>
+                    </div>
+                    <div className="row mt-2">
+                      <div className="col-5 text-warning">
+                        Fees
+                      </div>
+                      <div className="col-7">
+                        <input className="form-control"/>
+                      </div>
+                    </div>
+                    <div className="row mt-3">
+                      <div className="col-12 text-warning text-center">
+                       <span className="btn btn-primary">Withdraw</span>
+                      </div>
+                      
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

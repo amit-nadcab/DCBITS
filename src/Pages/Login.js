@@ -101,7 +101,7 @@ export const Login = () => {
                             res.message === "Login successfully!" &&
                             res?.params?.ev == 1
                           ) {
-                            dispatch(setIsLoggedIn({ LoginDetails: res }));
+                            dispatch(setIsLoggedIn({ user_id: res.params.user_id }));
                             toast(res.message);
                             navigate("/dashboard", {
                               state: { user_id: res.params.user_id },

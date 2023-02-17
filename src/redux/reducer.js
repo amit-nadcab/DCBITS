@@ -1,14 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { logDOM } from "@testing-library/react";
 
-// let email = localStorage.getItem("user_email");
+
 let user_id = localStorage.getItem("user_id");
 
 const initialValue = {
-  user: {
-    // email: email ? email : "",
-    user_id: user_id ? user_id : "",
-  },
+  user_id: user_id?user_id:'',
   isLoggedIn: user_id ? true : false,
 };
 
@@ -19,16 +15,21 @@ export const dataSlice = createSlice({
   },
   reducers: {
     setIsLoggedIn: (state, action) => {
+      console.log(action,"ghghggh");
       // localStorage.setItem("user_email", action.payload.LoginDetails.email);
-      localStorage.setItem(
-        "user_id",
-        action.payload.LoginDetails.params.user_id
-      );
-      state.value.user = action.payload.LoginDetails;
+      localStorage.setItem("user_id",action.payload.user_id);
+      state.value.user_id = action.payload.user_id;
       state.value.isLoggedIn = true;
+    },
+    logout: (state, action) => {
+      localStorage.removeItem("user_id");
+      state.value.user = {};
+      state.value.isLoggedIn = false;
     },
   },
 });
 
-export const { setIsLoggedIn } = dataSlice.actions;
+export const { setIsLoggedIn,logout } = dataSlice.actions;
 export default dataSlice.reducer;
+
+

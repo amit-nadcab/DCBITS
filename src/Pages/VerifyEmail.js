@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
 import { RiUserFill } from "react-icons/ri";
 import { verifyEmail } from '../utils/apiFunction';
+import { setIsLoggedIn } from '../redux/reducer';
 import { Footer } from '../Components/Footer';
-
+import { toast } from "react-toastify";
 
 export const VerifyEmail = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const [otp, setOtp] = useState(0)
   const [showOtpError, setShowOtpError] = useState(false)
@@ -54,9 +58,15 @@ export const VerifyEmail = () => {
                   if (otp === '') {
                     setShowOtpError(true)
                   } else {
-                    verifyEmail(otp, location?.state?.user_id,navigate).then((res)=>{
-                      console.log(res);
-                    }).catch((err)=>{
+                    verifyEmail(otp, location?.state?.user_id, navigate).then((res) => {
+                      console.log(res,"varifyOTP response");
+                      console.log(res.params.ev, "verify Response");
+                      if (res?.params?.ev) {
+                        dispatch(setIsLoggedIn({ user_id: res.params.user_id }));
+                        toast.info(res.message);
+                        navigate("/dashboard");
+                      }
+                    }).catch((err) => {
                       console.log(err);
                     })
                   }

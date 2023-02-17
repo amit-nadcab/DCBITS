@@ -132,7 +132,12 @@ a {
   .deposit_img {
     display:none
   }
+  .card-heading{
+    font-size: 20px;
+  }
 }
+
+
 
 .amount-value{
     color: #e9e7e7;

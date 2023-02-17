@@ -63,7 +63,7 @@ export const Signup = () => {
       <div className=" mx-auto signup-form-page page-wrapper">
         <div className=" mx-auto mt-5 mb-5">
             <div className="container">
-              <div className="col-md-5 signup-form mx-auto">
+              <div className="col-md-8 col-lg-4 col-12 signup-form mx-auto">
                 <div className="header">
                   <h1>Create an Account</h1>
                   <p>Get start</p>
@@ -209,7 +209,9 @@ if ((formData?.password !== '' && formData?.password !== undefined) && (formData
                         ).then((res)=>{
                           console.log(res,"aaa");
                           console.log(res?.params?.user_id, "response");
-                          
+                          if (res?.status == "400") {
+                            toast.error(res?.message);
+                          }
                           if(res?.params?.user_id){
                             navigate('/verifyEmail',{state:{user_id :res?.params?.user_id}})
                             toast.info("OTP is Shared on Email")

@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-// import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+
+import { login, resendOtp } from "../utils/apiFunction";
+import { setIsLoggedIn } from "../redux/reducer";
+
 import { Footer } from "../Components/Footer";
 import { Navbar } from "../Components/Navbar";
+
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdEmail } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
-import { login, resendOtp } from "../utils/apiFunction";
 import { toast } from "react-toastify";
 
 export const Login = () => {
   const navigate = useNavigate();
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
   const [formData, setFormdata] = useState({});
   const [showEmailError, setShowEmailError] = useState(false);
   const [passwordError, setShowPasswordError] = useState(false);
@@ -96,10 +101,11 @@ export const Login = () => {
                             res.message === "Login successfully!" &&
                             res?.params?.ev == 1
                           ) {
+                            dispatch(setIsLoggedIn({ LoginDetails: res }));
+                            toast(res.message);
                             navigate("/dashboard", {
                               state: { user_id: res.params.user_id },
                             });
-                            toast(res.message);
                           } else if (
                             res.message === "Login successfully!" &&
                             res?.params?.ev === false

@@ -198,7 +198,8 @@ export const Dashboard = () => {
                     </div>
                     <div className="row mt-3">
                       <div className="col-12 text-warning text-center">
-                       <span className="btn btn-primary">Withdraw</span>
+                      {/* <button className="custom-btn btn-5"><span>Fantastic!</span></button> */}
+                       <span className="btn btn-primary ms-3">Withdraw</span>
                       </div>
                       
                     </div>

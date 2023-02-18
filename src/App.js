@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "./App.css";
 import { Home } from "./Pages/Home";
 import { Signup } from "./Pages/Signup";
@@ -7,14 +8,26 @@ import { VerifyEmail } from "./Pages/VerifyEmail";
 import { Dashboard } from "./Pages/Dashboard";
 import { InvestHistory } from "./Pages/InvestHistory";
 import { WithdrawHistory } from "./Pages/WithdrawHistory";
+import { Reinvestment } from "./Pages/Reinvestment";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function App() {
+  const { user_id, isLoggedIn } = useSelector((state) => state.data.value);
+  console.log(user_id, "user_id in app.js file", isLoggedIn);
+
   const router = createBrowserRouter([
-    {
+    isLoggedIn ? {
       path: "/",
+      element: <Dashboard/>,
+    } : {
+      path: "/",
+      element: <Home/>
+    },
+    {
+      path: "/home",
       element: <Home />,
     },
     {
@@ -40,6 +53,9 @@ function App() {
     {
       path: "/withdrawHistory",
       element: <WithdrawHistory/>
+    },{
+      path: "/reinvestment",
+      element : <Reinvestment/>
     }
   ]);
   return (
@@ -47,7 +63,7 @@ function App() {
       <RouterProvider router={router} />
       <ToastContainer
         position="bottom-right"
-        autoClose={5000}
+        autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick

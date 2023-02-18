@@ -34,9 +34,9 @@ export const Sidebar = () => {
 
       <div class="sidebar" id='sidebar'>
         <ul>
-          <li><Link to="/"> <b> Home </b></Link></li>
+          <li><Link to="/home"> <b> Home </b></Link></li>
           <li><Link to="/dashboard"> <b> Dashboard </b></Link></li>
-          <li><Link href=""><b>Reinvestment</b> </Link></li>
+          <li><Link to="/reinvestment"><b>Reinvestment</b> </Link></li>
           <li><Link to="/investHistory"><b>Investment History</b> </Link></li>
           <li><Link to="/withdrawHistory"><b>Withdraw History</b></Link></li>
           {/* <li><Link href=""><b></b></Link></li> */}

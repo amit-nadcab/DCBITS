@@ -277,3 +277,20 @@ a {
     transform: translateY(-50%);
     cursor: pointer;
 }
+
+.table {
+
+  --bs-table-striped-color: #d3d3d3 !important;
+ 
+  color: #d3d3d3 !important;
+}
+
+.td-min-with{
+  min-width: 220px
+}
+
+.cb-c{
+  border: 1px solid cyan;
+    border-radius: 10px;
+    width: 50%;
+}

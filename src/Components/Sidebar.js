@@ -23,24 +23,29 @@ export const Sidebar = () => {
   return (
     <>
       <header class="header-1">
-        <div class="header_in">
+        <div class="header_in d-flex justify-content-between">
+          <Link className="navbar-brand" to="/home">
+            <img src="assets/img/logo.png" className="logo" alt="logo" width="172px" height="43px" />
+          </Link>
           <button type="button" class="toggle" id="toggle">
             <span></span>
           </button>
-          <span className='btn btn-primary' onClick={() => handleLogout()}>Logout</span>
+
 
         </div>
       </header>
 
       <div class="sidebar" id='sidebar'>
-        <ul>
-          <li><Link to="/home"> <b> Home </b></Link></li>
-          <li><Link to="/dashboard"> <b> Dashboard </b></Link></li>
-          <li><Link to="/reinvestment"><b>Reinvestment</b> </Link></li>
-          <li><Link to="/investHistory"><b>Investment History</b> </Link></li>
-          <li><Link to="/withdrawHistory"><b>Withdraw History</b></Link></li>
+        <ul className='mt-3'>
+          <li><Link to="/home"> <b className='text-white'> Home </b></Link></li>
+          <li><Link to="/dashboard"> <b className='text-white'> Dashboard </b></Link></li>
+          <li><Link to="/reinvestment"><b className='text-white'>Reinvestment</b> </Link></li>
+          <li><Link to="/investHistory"><b className='text-white'>Investment History</b> </Link></li>
+          <li><Link to="/withdrawHistory"><b className='text-white'>Withdraw History</b></Link></li>
           {/* <li><Link href=""><b></b></Link></li> */}
-          <li><Link href=""><b>Referral Income</b></Link></li>
+          <li><Link href=""><b className='text-white'>Referral Income</b></Link></li>
+          <hr style={{ color: "white" }} />
+          <li> <a className=''  onClick={() => handleLogout()}><b className='text-white'> Logout</b></a></li>
         </ul>
       </div>
     </>

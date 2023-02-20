@@ -12,10 +12,7 @@ export const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState([])
   const [copiedUSDT, setCopiedUSDT] = useState(false);
   const [copiedDCBT, setCopiedDCBT] = useState(false);
-  // console.log(user_id,);
 
-  console.log(user_id, "useruseruseruseruseruser");
-  // console.log(user?.user_id,"USEUUSERUSERUSER");
   useEffect(() => {
     getWalletAddress(user_id).then((res) => {
       setWalletAddress(res?.wallets)
@@ -170,14 +167,14 @@ export const Dashboard = () => {
             <div className="col-md-6 pt-2">
               <div className="dummy-data-1">
                 <h4 className="text-center mt-3 text-warning">Withdraw</h4>
-                <div className="card bg-transparent border-0" style={{ minHeight: "20vh" }}>
+                <div className="card bg-transparent border-0 d-none  d-lg-block " style={{ minHeight: "20vh" }}>
                   <div className="card-body my-auto">
                     <div className="row mt-2">
                       <div className="col-5 text-warning">
                         Enter Wallet Address
                       </div>
                       <div className="col-7">
-                        <input className="form-control"/>
+                        <input className="form-control" />
                       </div>
                     </div>
                     <div className="row mt-2">
@@ -185,7 +182,7 @@ export const Dashboard = () => {
                         Enter Amount
                       </div>
                       <div className="col-7">
-                        <input className="form-control"/>
+                        <input className="form-control" />
                       </div>
                     </div>
                     <div className="row mt-2">
@@ -193,15 +190,40 @@ export const Dashboard = () => {
                         Fees
                       </div>
                       <div className="col-7">
-                        <input className="form-control"/>
+                        <input className="form-control" />
                       </div>
                     </div>
                     <div className="row mt-3">
                       <div className="col-12 text-warning text-center">
-                      {/* <button className="custom-btn btn-5"><span>Fantastic!</span></button> */}
-                       <span className="btn btn-primary ms-3">Withdraw</span>
+                        {/* <button className="custom-btn btn-5"><span>Fantastic!</span></button> */}
+                        <span className="btn btn-primary ms-3">Withdraw</span>
                       </div>
-                      
+
+                    </div>
+                  </div>
+                </div>
+
+                {/* small screen*/}
+                <div className="card bg-transparent border-0 card bg-transparent border-0  d-sm-block d-md-block d-lg-none" style={{ minHeight: "20vh" }}>
+                  <div className="card-body my-auto w-75 mx-auto">
+                    <div className="row mt-2">
+                      <label className="text-warning">Enter Wallet Address</label>
+                      <input className="form-control"/>
+                    </div>
+                    <div className="row mt-2">
+                    <label className="text-warning">Enter Amount</label>
+                      <input className="form-control"/>
+                    </div>
+                    <div className="row mt-2">
+                    <label className="text-warning">Fees</label>
+                      <input className="form-control"/>
+                    </div>
+                    <div className="row mt-3">
+                      <div className="col-12 text-warning text-center">
+
+                        <span className="btn btn-primary ms-3">Withdraw</span>
+                      </div>
+
                     </div>
                   </div>
                 </div>

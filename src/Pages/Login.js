@@ -9,6 +9,7 @@ import { Footer } from "../Components/Footer";
 import { Navbar } from "../Components/Navbar";
 
 import { RiLockPasswordFill } from "react-icons/ri";
+import {BiHide, BiShow} from 'react-icons/bi'
 import { MdEmail } from "react-icons/md";
 import { toast } from "react-toastify";
 
@@ -19,12 +20,14 @@ export const Login = () => {
   const [formData, setFormdata] = useState({});
   const [showEmailError, setShowEmailError] = useState(false);
   const [passwordError, setShowPasswordError] = useState(false);
+  const [showP, setShowP] = useState(false)
 
   const getInputs = (value, name) => {
     const data = { [name]: value };
     setFormdata({ ...formData, ...data });
   };
 
+ 
   return (
     <>
       <Navbar />
@@ -62,13 +65,14 @@ export const Login = () => {
                   {showEmailError ? (
                     <p className="text-danger text-start">Enter Valid Email</p>
                   ) : null}
+                 
                 </div>
                 <div className="input">
                   <i className="">
                     <RiLockPasswordFill />
                   </i>
                   <input
-                    type="password"
+                    type={showP ? "text" : "password" }
                     placeholder="Password"
                     name="password"
                     onChange={(event) => {
@@ -88,7 +92,20 @@ export const Login = () => {
                   {passwordError ? (
                     <p className="text-danger text-start">Enter Password</p>
                   ) : null}
+                  {
+                    showP ? <BiShow className="position-absolute show-hide"
+                    onClick={() => {
+                      setShowP(!showP)
+                    }}/> :<BiHide
+                    className="position-absolute show-hide"
+                    onClick={() => {
+                      setShowP(!showP)
+                    }}
+                  />
+                  }
+                   
                 </div>
+                
                 <input
                   className="signup-btn"
                   type="button"

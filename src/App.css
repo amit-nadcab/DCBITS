@@ -120,6 +120,7 @@ a {
 }
 
 .dummy-data-1{
+  min-height: 297px;
     border: 1px solid rgba(255, 255, 255, 0.418);
     border-radius: 30px;
     /* height: 350px; */
@@ -220,6 +221,7 @@ a {
     box-shadow:0 2px 8px rgba(0,0,0,0.2);
     padding-top:90px;
     transition:all 0.3s ease-out;
+    z-index: 1;
   }
   
   .sidebar ul {
@@ -233,7 +235,7 @@ a {
   .sidebar ul li a {
     padding:8px 15px;
     font-size:16px;
-    color:#FFC107;
+    /* color:#FFC107; */
     font-family:arial;
     text-decoration:none;
     display:block;
@@ -252,7 +254,7 @@ a {
     transform:translate(-50%,-50%);
     width:0;
     height:1px;
-    background:#ffffff;
+    background:#ffbb00;
     z-index:-1;
     transition:all 0.3s ease-out;
   }

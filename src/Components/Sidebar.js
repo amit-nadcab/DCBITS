@@ -27,7 +27,7 @@ export const Sidebar = () => {
           <Link className="navbar-brand" to="/home">
             <img src="assets/img/logo.png" className="logo" alt="logo" width="172px" height="43px" />
           </Link>
-          <button type="button" class="toggle" id="toggle">
+          <button type="button" class="toggle button-1" id="toggle">
             <span></span>
           </button>
 

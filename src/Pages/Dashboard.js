@@ -12,6 +12,7 @@ export const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState([])
   const [copiedUSDT, setCopiedUSDT] = useState(false);
   const [copiedDCBT, setCopiedDCBT] = useState(false);
+  const [showOtp, setShowOtp] = useState(true)
 
   useEffect(() => {
     getWalletAddress(user_id).then((res) => {
@@ -194,10 +195,19 @@ export const Dashboard = () => {
                       </div>
                     </div>
                     <div className="row mt-3">
-                      <div className="col-12 text-warning text-center">
-                        {/* <button className="custom-btn btn-5"><span>Fantastic!</span></button> */}
-                        <span className="btn btn-primary ms-3">Withdraw</span>
+
+                      <div className="col-5 text-warning" style={{ visibility: showOtp ? "hidden" : "visible" }}>
+                        Enter OTP
                       </div>
+                      <div className="col-7 d-flex justify-content-end">
+                        <input className="form-control w-75" style={{ visibility: showOtp ? "hidden" : "visible" }} />
+                        {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Launch 
+                        </button> */}
+
+                        <span className="btn btn-primary ms-3" onClick={() => setShowOtp(false)}>Withdraw</span>
+                      </div>
+
 
                     </div>
                   </div>
@@ -208,19 +218,21 @@ export const Dashboard = () => {
                   <div className="card-body my-auto w-75 mx-auto">
                     <div className="row mt-2">
                       <label className="text-warning">Enter Wallet Address</label>
-                      <input className="form-control"/>
+                      <input className="form-control" />
                     </div>
                     <div className="row mt-2">
-                    <label className="text-warning">Enter Amount</label>
-                      <input className="form-control"/>
+                      <label className="text-warning">Enter Amount</label>
+                      <input className="form-control" />
                     </div>
                     <div className="row mt-2">
-                    <label className="text-warning">Fees</label>
-                      <input className="form-control"/>
+                      <label className="text-warning">Fees</label>
+                      <input className="form-control" />
                     </div>
                     <div className="row mt-3">
                       <div className="col-12 text-warning text-center">
-
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          Launch 
+                        </button>
                         <span className="btn btn-primary ms-3">Withdraw</span>
                       </div>
 
@@ -232,7 +244,23 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
-
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enter OTP</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                        <input className="form-controll"/>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <Footer />
     </>
   );

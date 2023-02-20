@@ -153,11 +153,11 @@ a {
     width:100%;
     position:fixed;
     top:0;
-    left:0;
+    right:0;
     z-index:9;
   }
   
-  button {
+  .button-1 {
     background:transparent;
     border:none;
     width:30px;
@@ -172,7 +172,7 @@ a {
     background:#ffffff;
     display:block;
     position:relative;
-    coursor:pointer;
+    cursor:pointer;
   }
   
   .toggle span:before,
@@ -216,7 +216,7 @@ a {
     width:235px;
     position:fixed;
     top:0;
-    left:-235px;
+    right:-235px;
     height:100%;
     box-shadow:0 2px 8px rgba(0,0,0,0.2);
     padding-top:90px;

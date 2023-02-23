@@ -78,3 +78,32 @@ export const updateWallet = async(user_id)=>{
     console.log(error);
   }
 }
+
+export const getWithdrawHistory = async(user_id)=>{
+  try {
+      const data = await axios.post(`${BASE_URL}/withdraw-history`,{user_id: user_id})
+      return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const checkUserStatus = async(user_id)=>{
+  try {
+      const data = await axios.post(`${BASE_URL}/check_user_status`,{user_id: user_id})
+      return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getInvestmentHistory = async(user_id)=>{
+  try {
+      const data = await axios.post(`${BASE_URL}/investment-history`,{user_id: user_id})
+      return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+

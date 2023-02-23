@@ -5,7 +5,7 @@ import { Footer } from "../Components/Footer";
 import { Sidebar } from "../Components/Sidebar";
 import { AiOutlineCopy } from "react-icons/ai";
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { createWallet, getWalletAddress, updateWallet } from "../utils/apiFunction";
+import { createWallet, getWalletAddress, updateWallet, checkUserStatus} from "../utils/apiFunction";
 
 export const Dashboard = () => {
   const { user_id } = useSelector((state) => state.data.value);
@@ -13,6 +13,7 @@ export const Dashboard = () => {
   const [copiedUSDT, setCopiedUSDT] = useState(false);
   const [copiedDCBT, setCopiedDCBT] = useState(false);
   const [showOtp, setShowOtp] = useState(true)
+  const [userStats, setUserStats] = useState({})
 
   useEffect(() => {
     getWalletAddress(user_id).then((res) => {
@@ -21,7 +22,11 @@ export const Dashboard = () => {
     updateWallet(user_id).then((res) => {
       console.log(res, "update wallet address");
     })
-  }, [user_id])
+    checkUserStatus(user_id).then((res)=>{
+      setUserStats(res?.user_data)
+
+    }
+  )}, [user_id])
 
   setTimeout(() => {
     setCopiedUSDT(false);
@@ -44,51 +49,69 @@ export const Dashboard = () => {
       <Sidebar />
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
-          <div className="row pt-5">
-            <div className="col-md-4 pt-5">
+          {
+            userStats?.user_status === 1 ? 
+            <div className="row">
+              
+              <div className="col-md-12 pt-5">
+              <div className="dummy-data d-flex align-items-center justify-content-center">
+                <p className="text-center  amount-value fs-6 ref-link">
+                <span className="text-warning">Referral Link: </span>   {`https://staking.dcbits.io/signup?id=${userStats?.self_ref_code}`} 
+                <span className="ms-3"><AiOutlineCopy/></span> 
+                </p>
+              
+              </div>
+            </div>
+            </div> : 
+            null
+          }
+        
+          <div className="row ">
+            {/* <div>Referral Link: </div> */}
+            <div className="col-md-6 pt-5">
               <div className="dummy-data">
-                <h4 className="text-center mt-2 text-warning card-heading">Total Deposit</h4>
+                <h4 className="text-center mt-2 text-warning card-heading">Total Earning</h4>
                 <p className="text-center mt-3 amount-value fs-6">
-                  50 USDT + 50 DCBT
+                  {userStats?.roi_income && userStats?.referral_income ?  userStats?.roi_income + userStats?.referral_income : 0} USDT
                 </p>
               </div>
             </div>
-            <div className="col-md-4 pt-5">
+            <div className="col-md-6 pt-5">
               <div className="dummy-data">
                 <h4 className="text-center mt-2 text-warning card-heading">
-                  Total Withdrwa
+                  Total ROI Income
                 </h4>
-                <p className="text-center mt-3 amount-value fs-6">50 USDT</p>
+                <p className="text-center mt-3 amount-value fs-6">{userStats?.roi_income ? userStats?.roi_income : 0} USDT</p>
               </div>
             </div>
-            <div className="col-md-4 pt-5">
+            {/* <div className="col-md-4 pt-5">
               <div className="dummy-data">
                 <h4 className="text-center mt-2 text-warning card-heading">Total Earning</h4>
                 <p className="text-center mt-3 amount-value fs-6">50 USDT</p>
               </div>
-            </div>
-            <div className="col-md-4 pt-5">
+            </div> */}
+            <div className="col-md-6 pt-5">
               <div className="dummy-data">
                 <h4 className="text-center mt-2 text-warning card-heading">
                   Total Direct Members
                 </h4>
-                <p className="text-center mt-3 amount-value fs-6">5</p>
+                <p className="text-center mt-3 amount-value fs-6">{userStats?.directs ? userStats?.directs : 0}</p>
               </div>
             </div>
-            <div className="col-md-4 pt-5">
+            <div className="col-md-6 pt-5">
               <div className="dummy-data">
                 <h4 className="text-center mt-2 text-warning card-heading">
-                  Total Direct Income
+                  Total Level Income
                 </h4>
-                <p className="text-center mt-3 amount-value fs-6">50 USDT</p>
+                <p className="text-center mt-3 amount-value fs-6">{userStats?.referral_income ? userStats?.referral_income : 0} USDT</p>
               </div>
             </div>
-            <div className="col-md-4 pt-5">
+            {/* <div className="col-md-4 pt-5">
               <div className="dummy-data">
                 <h4 className="text-center mt-2 text-warning card-heading">Total Earning</h4>
                 <p className="text-center mt-3 amount-value fs-6">50 USDT</p>
               </div>
-            </div>
+            </div> */}
           </div>
 
           <div className="row mt-5">
@@ -242,6 +265,8 @@ export const Dashboard = () => {
               </div>
             </div>
           </div>
+
+          
         </div>
       </div>
       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

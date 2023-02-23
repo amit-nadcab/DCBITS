@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Sidebar } from '../Components/Sidebar'
 import { Footer } from '../Components/Footer'
+import { getWithdrawHistory } from '../utils/apiFunction'
 
 export const WithdrawHistory = () => {
+    const { user_id } = useSelector((state) => state.data.value);
+    const [tab, setTab] = useState([])
+
+    useEffect(()=>{
+        getWithdrawHistory(user_id).then((res)=>{
+            setTab(res?.history)
+        })
+    },[user_id])
+
     return (
         <>
             <Sidebar />
@@ -20,66 +31,19 @@ export const WithdrawHistory = () => {
                                 </tr>
                             </thead>
                             <tbody className='text-center'>
-                                <tr>
-                                    <td>1</td>
-                                    <td className='td-min-with'>500 USDT + 500  DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td className='td-min-with'>100 USDT + 100 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td className='td-min-with'>200 USDT + 200 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td className='td-min-with'>500 USDT + 500 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td className='td-min-with'>600 USDT + 600 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td className='td-min-with'>500 USDT + 500 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td className='td-min-with'>1500 USDT + 1500 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td className='td-min-with'>5200 USDT + 5200 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td className='td-min-with'>500 USDT + 500 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td className='td-min-with'>300 USDT + 300 DCBT</td>
-                                    <td className='td-min-with'>18-02-2023</td>
-                                    <td>0x0000</td>
-                                </tr>
+                                {
+                                    tab && (tab?.length > 0) ? tab.map((e,i)=>{
+                                        return (
+                                            <tr>
+                                            <td>1</td>
+                                            <td className='td-min-with'>500 USDT + 500  DCBT</td>
+                                            <td className='td-min-with'>18-02-2023</td>
+                                            <td>0x0000</td>
+                                        </tr>
+                                        )
+                                    }) : null
+                                }
+                                
                             </tbody>
                         </table>
                     </div>

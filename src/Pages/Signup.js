@@ -38,7 +38,7 @@ export const Signup = () => {
 
   const [todos, dispatch] = useReducer(reducer, initialTodos);
   const [formData, setFormDate] = useState({});
-  const [showOtp, setShowOtp] = useState(true);
+  
 
   // const [showRefIDError, setShowRefIDError] = useState(false)
   const [showEmailError, setShowEmailError] = useState(false)
@@ -50,11 +50,15 @@ export const Signup = () => {
     setFormDate({ ...formData, ...data });
   };
 
-  useEffect(() => {
-    setFormDate({ ...formData, refID: location?.search.slice(7) });
-  }, []);
+  // useEffect(() => {
+  //   setFormDate({ ...formData, refID: location?.search.slice(7) });
+  // }, []);
 
-  // console.log(formData);
+  useEffect(()=>{
+    console.log(formData);
+  },[formData])
+
+  
 
   return (
     <>
@@ -77,7 +81,7 @@ export const Signup = () => {
                       type="text"
                       name="refID"
                       placeholder="Referral ID"
-                      value={formData?.refID}
+                      // value={formData?.refID} 
                       onChange={(event) => {
                         getInputs(
                           Number(

@@ -9,7 +9,7 @@ import { VerifyEmail } from "./Pages/VerifyEmail";
 import { Dashboard } from "./Pages/Dashboard";
 import { InvestHistory } from "./Pages/InvestHistory";
 import { WithdrawHistory } from "./Pages/WithdrawHistory";
-import { Reinvestment } from "./Pages/Reinvestment";
+// import { Reinvestment } from "./Pages/Reinvestment";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -23,7 +23,7 @@ function App() {
         <Route path="/" element={isLoggedIn ? <Dashboard /> : <Home />} />
         <Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to='/home' />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/reinvestment" element={isLoggedIn ? <Reinvestment /> : <Navigate to='/home' />} />
+        {/* <Route path="/reinvestment" element={isLoggedIn ? <Reinvestment /> : <Navigate to='/home' />} /> */}
         <Route path="/withdrawHistory" element={isLoggedIn ? <WithdrawHistory /> : <Navigate to='/home' />} />
         <Route path="/investHistory" element={isLoggedIn ?  <InvestHistory />: <Navigate to='/home' /> } />
         <Route path="/verifyEmail" element={<VerifyEmail />} />

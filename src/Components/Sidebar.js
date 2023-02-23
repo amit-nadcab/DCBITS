@@ -39,15 +39,18 @@ export const Sidebar = () => {
         <ul className='mt-3'>
           <li><Link to="/home"> <b className='text-white'> Home </b></Link></li>
           <li><Link to="/dashboard"> <b className='text-white'> Dashboard </b></Link></li>
-          <li><Link to="/reinvestment"><b className='text-white'>Reinvestment</b> </Link></li>
+          {/* <li><Link to="/reinvestment"><b className='text-white'>Reinvestment</b> </Link></li> */}
           <li><Link to="/investHistory"><b className='text-white'>Investment History</b> </Link></li>
           <li><Link to="/withdrawHistory"><b className='text-white'>Withdraw History</b></Link></li>
           {/* <li><Link href=""><b></b></Link></li> */}
           <li><Link href=""><b className='text-white'>Referral Income</b></Link></li>
           <hr style={{ color: "white" }} />
           <li> <a className=''  onClick={() => handleLogout()}><b className='text-white'> Logout</b></a></li>
+        
         </ul>
+        <img src='assets/img/sidebar1.png' className=''/>
       </div>
+  
     </>
   )
 }

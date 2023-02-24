@@ -59,7 +59,7 @@ export const Dashboard = () => {
       <Sidebar />
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
-          {userStats?.user_status === 1 || true ? (
+          {userStats?.user_status === 1 ? (
             <div className="row">
               <div className="col-md- pt-5">
                 <div className="dummy-data d-flex align-items-center justify-content-center">
@@ -97,8 +97,8 @@ export const Dashboard = () => {
                   Total Earning
                 </h4>
                 <p className="text-center mt-3 amount-value fs-6">
-                  {userStats?.roi_income && userStats?.referral_income
-                    ? roundTo((userStats?.roi_income + userStats?.referral_income),4)
+                  {userStats?.roi_income || userStats?.referral_income
+                    ? roundTo(Number(userStats?.roi_income + Number(userStats?.referral_income)),4)
                     : 0}{" "}
                   USDT
                 </p>
@@ -166,7 +166,7 @@ export const Dashboard = () => {
                   </div>
                   <div className="col-lg-6 m-auto">
                     <div className="card bg-transparent border-0">
-                      <div className="card-body">
+                      <div className="card-body wallet-card">
                         {walletAddress && walletAddress?.length > 0 ? (
                           <>
                             <div className="mt-4">
@@ -266,19 +266,19 @@ export const Dashboard = () => {
                         Enter Wallet Address
                       </div>
                       <div className="col-7">
-                        <input className="form-control" />
+                        <input className="form-control withdrwa-input" />
                       </div>
                     </div>
                     <div className="row mt-2">
                       <div className="col-5 amount-value">Enter Amount</div>
                       <div className="col-7">
-                        <input className="form-control" />
+                        <input className="form-control withdrwa-input" />
                       </div>
                     </div>
                     <div className="row mt-2">
                       <div className="col-5 amount-value">Fees</div>
                       <div className="col-7">
-                        <input className="form-control" />
+                        <input className="form-control withdrwa-input" />
                       </div>
                     </div>
                     <div className="row mt-3">
@@ -290,7 +290,7 @@ export const Dashboard = () => {
                       </div>
                       <div className="col-7 d-flex justify-content-end">
                         <input
-                          className="form-control w-75"
+                          className="form-control w-75 withdrwa-input"
                           style={{ visibility: showOtp ? "hidden" : "visible" }}
                         />
                         {/* <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -315,18 +315,18 @@ export const Dashboard = () => {
                 >
                   <div className="card-body my-auto w-75 mx-auto">
                     <div className="row mt-2">
-                      <label className="amount-value">
+                      <label className="amount-value p-0">
                         Enter Wallet Address
                       </label>
-                      <input className="form-control" />
+                      <input className="form-control withdrwa-input" />
                     </div>
                     <div className="row mt-2">
-                      <label className="amount-value">Enter Amount</label>
-                      <input className="form-control" />
+                      <label className="amount-value p-0">Enter Amount</label>
+                      <input className="form-control withdrwa-input" />
                     </div>
                     <div className="row mt-2">
-                      <label className="amount-value">Fees</label>
-                      <input className="form-control" />
+                      <label className="amount-value p-0">Fees</label>
+                      <input className="form-control withdrwa-input" />
                     </div>
                     <div className="row mt-3">
                       <div className="col-12 text-warning text-center">

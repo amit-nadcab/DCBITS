@@ -5,6 +5,7 @@ import { Footer } from "../Components/Footer";
 import { Sidebar } from "../Components/Sidebar";
 import { AiOutlineCopy } from "react-icons/ai";
 import { CopyToClipboard } from "react-copy-to-clipboard";
+import { roundTo } from "round-to";
 import {
   createWallet,
   getWalletAddress,
@@ -18,8 +19,10 @@ export const Dashboard = () => {
   const [walletAddress, setWalletAddress] = useState([]);
   const [copiedUSDT, setCopiedUSDT] = useState(false);
   const [copiedDCBT, setCopiedDCBT] = useState(false);
+  const [copiedRef, setCopiedRef] = useState(false);
   const [showOtp, setShowOtp] = useState(true);
   const [userStats, setUserStats] = useState({});
+  const [totalInvest, setTotalInvest] = useState(0)
 
   useEffect(() => {
     getWalletAddress(user_id).then((res) => {
@@ -30,13 +33,15 @@ export const Dashboard = () => {
     });
     checkUserStatus(user_id).then((res) => {
       setUserStats(res?.user_data);
+      setTotalInvest(res?.total)
     });
   }, [user_id]);
 
   setTimeout(() => {
     setCopiedUSDT(false);
     setCopiedDCBT(false);
-  }, 1000);
+    setCopiedRef(false)
+  }, 10000);
 
   const handleCopy = (type) => {
     console.log(type, "type");
@@ -54,66 +59,71 @@ export const Dashboard = () => {
       <Sidebar />
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
-          {userStats?.user_status === 1 ? (
+          {userStats?.user_status === 1 || true ? (
             <div className="row">
-              <div className="col-md-12 pt-5">
+              <div className="col-md- pt-5">
                 <div className="dummy-data d-flex align-items-center justify-content-center">
-                  <p className="text-center  amount-value fs-6 ref-link">
-                    <span className="text-warning">Referral Link: </span>{" "}
-                    {`${BASE_URL_2}/signup?id=${userStats?.self_ref_code}`}
-                    <span className="ms-3">
+                  <p className="text-center  amount-value fs-6 ref-link position-relative">
+                    <span className="card-heading">Referral Link: </span>{" "}
+                    {`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
+                    <span className="ms-1">
                       <CopyToClipboard
-                        text={`${BASE_URL_2}/signup?id=${userStats?.self_ref_code}`}
-                        onCopy={() => handleCopy(walletAddress[0]?.wallet_type)}
+                        text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
+                        onCopy={() => setCopiedRef(true)}
                       >
                         <span className="mx-1 small">
                           <AiOutlineCopy color="white" cursor="pointer" />
                         </span>
                       </CopyToClipboard>
                     </span>
-                  </p>
-                  {copiedUSDT ? (
-                    <span className="small mx-1">Copied</span>
+                    {copiedRef ? (
+                    <span className="small mx-1 text-white position-absolute">Copied</span>
                   ) : null}
+                  </p>
+                  
                 </div>
+              </div>
+              <div className="col-md-6">
+
               </div>
             </div>
           ) : null}
 
           <div className="row ">
             {/* <div>Referral Link: </div> */}
-            <div className="col-md-6 pt-5">
+            <div className="col-md-4 pt-5">
               <div className="dummy-data">
-                <h4 className="text-center mt-2 text-warning card-heading">
+                <h4 className="text-center mt-2 card-heading">
                   Total Earning
                 </h4>
                 <p className="text-center mt-3 amount-value fs-6">
                   {userStats?.roi_income && userStats?.referral_income
-                    ? userStats?.roi_income + userStats?.referral_income
+                    ? roundTo((userStats?.roi_income + userStats?.referral_income),4)
                     : 0}{" "}
                   USDT
                 </p>
               </div>
             </div>
-            <div className="col-md-6 pt-5">
+            <div className="col-md-4 pt-5">
               <div className="dummy-data">
-                <h4 className="text-center mt-2 text-warning card-heading">
+                <h4 className="text-center mt-2 card-heading card-heading">Total Investment</h4>
+                <p className="text-center mt-3 amount-value fs-6">{totalInvest ? roundTo(totalInvest,4) : 0} USDT</p>
+              </div>
+            </div>
+            <div className="col-md-4 pt-5">
+              <div className="dummy-data">
+                <h4 className="text-center mt-2 card-heading">
                   Total ROI Income
                 </h4>
                 <p className="text-center mt-3 amount-value fs-6">
-                  {userStats?.roi_income ? userStats?.roi_income : 0} USDT
+                  {userStats?.roi_income ? roundTo(userStats?.roi_income,4) : 0} USDT
                 </p>
               </div>
             </div>
-            {/* <div className="col-md-4 pt-5">
-              <div className="dummy-data">
-                <h4 className="text-center mt-2 text-warning card-heading">Total Earning</h4>
-                <p className="text-center mt-3 amount-value fs-6">50 USDT</p>
-              </div>
-            </div> */}
+           
             <div className="col-md-6 pt-5">
               <div className="dummy-data">
-                <h4 className="text-center mt-2 text-warning card-heading">
+                <h4 className="text-center mt-2  card-heading">
                   Total Direct Members
                 </h4>
                 <p className="text-center mt-3 amount-value fs-6">
@@ -123,11 +133,11 @@ export const Dashboard = () => {
             </div>
             <div className="col-md-6 pt-5">
               <div className="dummy-data">
-                <h4 className="text-center mt-2 text-warning card-heading">
+                <h4 className="text-center mt-2  card-heading">
                   Total Level Income
                 </h4>
                 <p className="text-center mt-3 amount-value fs-6">
-                  {userStats?.referral_income ? userStats?.referral_income : 0}{" "}
+                  {userStats?.referral_income ? roundTo(userStats?.referral_income,4) : 0}{" "}
                   USDT
                 </p>
               </div>
@@ -143,7 +153,7 @@ export const Dashboard = () => {
           <div className="row mt-5">
             <div className="col-md-6 pt-2">
               <div className="dummy-data-1">
-                <h4 className="text-center mt-2 text-warning">Wallet</h4>
+                <h4 className="text-center mt-2 amount-value">Wallet</h4>
                 <div className="row">
                   <div className="col-lg-5">
                     <div className="text-center">
@@ -160,12 +170,12 @@ export const Dashboard = () => {
                         {walletAddress && walletAddress?.length > 0 ? (
                           <>
                             <div className="mt-4">
-                              <h6 className="text-warning">
+                              <h6 className="card-heading">
                                 <b>
                                   {walletAddress[0]?.wallet_type} Wallet Address
                                 </b>
                               </h6>
-                              <p className="text-white">
+                              <p className="text-white position-realative">
                                 {walletAddress[0]?.wallet_address.slice(0, 10) +
                                   "..." +
                                   walletAddress[0]?.wallet_address.slice(25)}
@@ -183,18 +193,18 @@ export const Dashboard = () => {
                                   </span>
                                 </CopyToClipboard>
                                 {copiedUSDT ? (
-                                  <span className="small mx-1">Copied</span>
+                                  <span className="small mx-1 position-absolute">Copied</span>
                                 ) : null}
                               </p>
                             </div>
 
                             <div className="mt-4">
-                              <h6 className="text-warning">
+                              <h6 className="card-heading">
                                 <b>
                                   {walletAddress[1]?.wallet_type} Wallet Address
                                 </b>
                               </h6>
-                              <p className="text-white">
+                              <p className="text-white position-realative">
                                 {walletAddress[1]?.wallet_address.slice(0, 10) +
                                   "..." +
                                   walletAddress[1]?.wallet_address.slice(25)}
@@ -212,7 +222,7 @@ export const Dashboard = () => {
                                   </span>
                                 </CopyToClipboard>
                                 {copiedDCBT ? (
-                                  <span className="small mx-1">Copied</span>
+                                  <span className="small mx-1 position-absolute">Copied</span>
                                 ) : null}
                               </p>
                             </div>
@@ -245,14 +255,14 @@ export const Dashboard = () => {
             </div>
             <div className="col-md-6 pt-2">
               <div className="dummy-data-1">
-                <h4 className="text-center mt-3 text-warning">Withdraw</h4>
+                <h4 className="text-center mt-3 amount-value">Withdraw</h4>
                 <div
                   className="card bg-transparent border-0 d-none  d-lg-block "
                   style={{ minHeight: "20vh" }}
                 >
                   <div className="card-body my-auto">
                     <div className="row mt-2">
-                      <div className="col-5 text-warning">
+                      <div className="col-5 amount-value">
                         Enter Wallet Address
                       </div>
                       <div className="col-7">
@@ -260,20 +270,20 @@ export const Dashboard = () => {
                       </div>
                     </div>
                     <div className="row mt-2">
-                      <div className="col-5 text-warning">Enter Amount</div>
+                      <div className="col-5 amount-value">Enter Amount</div>
                       <div className="col-7">
                         <input className="form-control" />
                       </div>
                     </div>
                     <div className="row mt-2">
-                      <div className="col-5 text-warning">Fees</div>
+                      <div className="col-5 amount-value">Fees</div>
                       <div className="col-7">
                         <input className="form-control" />
                       </div>
                     </div>
                     <div className="row mt-3">
                       <div
-                        className="col-5 text-warning"
+                        className="col-5 amount-value"
                         style={{ visibility: showOtp ? "hidden" : "visible" }}
                       >
                         Enter OTP
@@ -305,17 +315,17 @@ export const Dashboard = () => {
                 >
                   <div className="card-body my-auto w-75 mx-auto">
                     <div className="row mt-2">
-                      <label className="text-warning">
+                      <label className="amount-value">
                         Enter Wallet Address
                       </label>
                       <input className="form-control" />
                     </div>
                     <div className="row mt-2">
-                      <label className="text-warning">Enter Amount</label>
+                      <label className="amount-value">Enter Amount</label>
                       <input className="form-control" />
                     </div>
                     <div className="row mt-2">
-                      <label className="text-warning">Fees</label>
+                      <label className="amount-value">Fees</label>
                       <input className="form-control" />
                     </div>
                     <div className="row mt-3">
@@ -326,9 +336,9 @@ export const Dashboard = () => {
                           data-bs-toggle="modal"
                           data-bs-target="#exampleModal"
                         >
-                          Launch
+                         Withdraw
                         </button>
-                        <span className="btn btn-primary ms-3">Withdraw</span>
+                        {/* <span className="btn btn-primary ms-3">Withdraw</span> */}
                       </div>
                     </div>
                   </div>

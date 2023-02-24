@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 export const registration = async (refID, email, password, confirm_password, navigate) => {
   try {
-    const data = await axios.post(`${BASE_URL}/register-user`, { "parent_ref-code": refID, email: email, password: password, confirm_password: confirm_password, });
+    const data = await axios.post(`${BASE_URL}/register-user`, { parent_ref_code: refID, email: email, password: password, confirm_password: confirm_password, });
     return data.data;
   } catch (error) {
     if (error) {

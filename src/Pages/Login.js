@@ -37,7 +37,7 @@ export const Login = () => {
           <div className="container">
             <div className="col-md-4 signup-form mx-auto">
               <div className="header">
-                <h1>Login from here</h1>
+                <h1>Login</h1>
               </div>
               <form>
                 <div className="input">
@@ -94,6 +94,7 @@ export const Login = () => {
                   ) : null}
                   {
                     showP ? <BiShow className="position-absolute show-hide"
+                    color="white"
                     onClick={() => {
                       setShowP(!showP)
                     }}/> :<BiHide
@@ -107,7 +108,7 @@ export const Login = () => {
                 </div>
                 
                 <input
-                  className="signup-btn"
+                  className="signup-btn btn btn-primary"
                   type="button"
                   value="LOGIN"
                   onClick={() => {
@@ -168,7 +169,7 @@ export const Login = () => {
                 />
               </form>
               <p>
-                Don't have an account? <Link to="/signup">sign up</Link>
+                Don't have an account? <Link to="/signup" className="text-primary">sign up</Link>
               </p>
             </div>
           </div>

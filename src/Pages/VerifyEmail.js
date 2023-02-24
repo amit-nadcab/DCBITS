@@ -54,7 +54,7 @@ export const VerifyEmail = () => {
 
                 </div>
                 {showOtpError ? <p className='text-danger text-start'>Enter OTP</p> : null}
-                <input className="signup-btn" type="button" value="Verify" onClick={() => {
+                <input className="signup-btn btn btn-primary" type="button" value="Verify" onClick={() => {
                   if (otp === '') {
                     setShowOtpError(true)
                   } else {

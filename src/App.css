@@ -7,9 +7,10 @@ p {
     /* width: 480px; */
     padding: 32px;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: #101010;
     box-shadow: 2px 4px 8px #6b728040;
     text-align: center;
+    border: 1px solid #ffffff5c;
 }
 
 .header {
@@ -19,7 +20,7 @@ p {
 .header h1 {
     font-weight: bolder;
     font-size: 28px;
-    color: #6366f1;
+    color: #ffffff;
 }
 
 .input {
@@ -32,8 +33,8 @@ p {
     border: none;
     padding: 8px 40px;
     border-radius: 4px;
-    background-color: #f3f4f6;
-    color: #1f2937;
+    background-color: #1C1C1C;
+    color: #fff;
     font-size: 16px;
 }
 
@@ -56,7 +57,7 @@ p {
     padding: 8px 0;
     margin: 24px 0;
     border-radius: 4px;
-    background-color: #6366f1;
+    /* background-color: #0a0ca5; */
     color: #ffffff;
     font-size: 16px;
     cursor: pointer;
@@ -98,16 +99,17 @@ a {
 
 .signup-form-page {
     padding: 100px 0px;
-    background: rgb(49, 34, 239);
-    background: -moz-linear-gradient(90deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%);
+    background: rgb(0, 0, 0);
+    /* background: -moz-linear-gradient(90deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%);
     background: -webkit-linear-gradient(90deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%);
-    background: linear-gradient(178deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%);
+    background: linear-gradient(178deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%); */
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#3122ef", endColorstr="#757ae6", GradientType=1);
 }
 
 .page-wrapper{
     min-height: 89vh;
-    background: linear-gradient(178deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%);
+    background-color: #000000;
+    /* background: linear-gradient(178deg, rgba(49, 34, 239, 1) 14%, rgba(117, 122, 230, 1) 68%); */
 }
 
 .dummy-data{
@@ -115,8 +117,8 @@ a {
     border-radius: 25px;
     height: 100px;
     /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
-    background-color: #d7d6d64d;
-    color: #ffffffd8;
+    background-color: #0000004d;
+    /* color: #ffffffd8; */
 }
 
 .dummy-data-1{
@@ -125,7 +127,7 @@ a {
     border-radius: 30px;
     /* height: 350px; */
     /* box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset; */
-    background-color: #d7d6d64d;
+    background-color: #0000004d;
     /* color: #ffffff; */
 }
 
@@ -135,19 +137,23 @@ a {
   }
   .card-heading{
     font-size: 20px;
+    color: #c5c4c4;
   }
 }
 
 
+.card-heading{
+  color: #c5c4c4;
+}
 
 .amount-value{
-    color: #e9e7e7;
+    color:  #ffffff;
 }
 
 
 /* Sidebar and Header Start */
 .header-1 {
-    background:#6A35FF;
+    background:#000000;
     box-shadow:0 2px 5px rgba(0,0,0,0.2);
     padding: 15px 20px;
     width:100%;
@@ -212,7 +218,7 @@ a {
   }
   
   .sidebar {
-    background:#6A35FF;
+    background:#101010;
     width:235px;
     position:fixed;
     top:0;
@@ -254,7 +260,7 @@ a {
     transform:translate(-50%,-50%);
     width:0;
     height:1px;
-    background:#ffbb00;
+    background:#ffffff;
     z-index:-1;
     transition:all 0.3s ease-out;
   }
@@ -278,6 +284,7 @@ a {
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
+    color: #fff;
 }
 
 .table {

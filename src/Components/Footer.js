@@ -1,10 +1,12 @@
 import React from 'react'
+import {BsFacebook} from  'react-icons/bs'
+import {AiFillTwitterCircle} from 'react-icons/ai'
 
 export const Footer = () => {
   return (
     <>
     {/* style={{backgroundImage:"url('assets/img/footer-bg.png')"}} */}
-     <div className="footer" style={{background: "#6A35FF"}}>
+     <div className="footer" style={{background: "#000"}}>
         <div className="container">
             <div className="col-12">
                 {/* <div className="subscribe-content"  style={{backgroundImage:"url('assets/img/subscribe-bg.png')"}}>
@@ -83,14 +85,12 @@ export const Footer = () => {
                 <div className="col-12 text-center">
                     <div className="footer-bottom">
                         <div className="content wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s">
-                            <p className="text">Copyright &copy; {new Date().getFullYear()}. All Rights Reserved By <a href="#">DCBITS</a></p>
+                            <p className="text">Copyright &copy; {new Date().getFullYear()}. All Rights Reserved By <a href="#" className='text-primary'> DCBITS</a></p>
                         </div>
                         <div className="social-style wow fadeInUp" data-wow-duration="0.3s" data-wow-delay="0.3s">
-                            <a href="#"><i className="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/dcbits"><i className="fab fa-twitter"></i></a>
-                            <a href="https://t.me/DcBits73"><i className="fab fa-telegram"></i></a>
-                            {/* <a href="#"><i className="fab fa-google-plus-g"></i></a> */}
-                            {/* <a href="#"><i className="fab fa-instagram"></i></a> */}
+                            <a href="#"><BsFacebook/></a>
+                            <a href="https://twitter.com/dcbits" target="_blank" rel="noreferrer"><AiFillTwitterCircle/></a>
+                            <a href="https://t.me/DcBits73" target="_blank" rel="noreferrer"><i className="fab fa-telegram"></i></a>
                         </div>
                     </div>
                 </div>

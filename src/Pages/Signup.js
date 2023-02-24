@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useReducer } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate} from "react-router-dom";
 
 import { Footer } from "../Components/Footer";
 import { Navbar } from "../Components/Navbar";
@@ -34,6 +34,7 @@ export const Signup = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+
   const [todos, dispatch] = useReducer(reducer, initialTodos);
   const [formData, setFormDate] = useState({});
   // const [ref, setRef] = useEffect("");
@@ -47,11 +48,12 @@ export const Signup = () => {
     const data = { [name]: value };
     setFormDate({ ...formData, ...data });
   };
+  
 
   useEffect(() => {
     if (location?.search) {
-      console.log("in");
-      setFormDate({ ...formData, refID: location?.search.slice(7) });
+      console.log("in",location?.search);
+      setFormDate({ ...formData, refID: location?.search.slice(4) });
     } else {
       console.log("out");
     }
@@ -81,7 +83,7 @@ export const Signup = () => {
                   <input
                     type="text"
                     name="refID"
-                    placeholder="Referral ID"
+                    placeholder="Referral ID (Optional)"
                     value={formData?.refID}
                     onChange={(event) => {
                       getInputs(event.target.value, event.target.name);
@@ -197,7 +199,7 @@ export const Signup = () => {
                 </div>
 
                 <input
-                  className="signup-btn"
+                  className="signup-btn btn btn-primary"
                   type="button"
                   value="SIGN UP"
                   onClick={() => {
@@ -258,8 +260,8 @@ export const Signup = () => {
                   }}
                 />
               </form>
-              <p>
-                Already have an account? <Link to="/login">sign in</Link>
+              <p className="text-white">
+                Already have an account? <Link to="/login" className="text-primary">sign in</Link>
               </p>
             </div>
           </div>

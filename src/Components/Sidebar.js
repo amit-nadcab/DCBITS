@@ -48,7 +48,8 @@ export const Sidebar = () => {
           <li> <a className=''  onClick={() => handleLogout()}><b className='text-white'> Logout</b></a></li>
         
         </ul>
-        <img src='assets/img/sidebar1.png' className=''/>
+        <div className=''><img src='assets/img/sidebar1.png' className=''/></div>
+        
       </div>
   
     </>

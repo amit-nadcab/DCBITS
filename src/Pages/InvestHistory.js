@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Sidebar } from "../Components/Sidebar";
 import { Footer } from "../Components/Footer";
+import { Header } from "../Components/Header";
 import { getInvestmentHistory } from "../utils/apiFunction";
 
 export const InvestHistory = () => {
@@ -18,10 +19,10 @@ export const InvestHistory = () => {
 
   return (
     <>
-      <Sidebar />
+      <Header />
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
-          <h2 className="text-center text-white">Investment History</h2>
+          <h2 className="text-center text-secondary">Investment History</h2>
           <div className="table-responsive mt-5">
             <table className="table table-borderless table-striped">
               <thead className="text-center" style={{ background: "#6A35FF" }}>

@@ -1,12 +1,13 @@
 import React from 'react'
 import { Navbar } from '../Components/Navbar'
 import { Footer } from '../Components/Footer'
+import { Header } from '../Components/Header'
 
 export const Home = () => {
   return (
     <>
-    <Navbar/>
-
+    
+    <Header/>
      {/* Banners Start */}
      <div className="banner" id="home" style={{backgroundImage: "url('assets/img/banner-bg.png')"}}>
         <img className="bg-sape" src="assets/img/banner-bg-2.png" alt=""/>

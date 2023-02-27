@@ -94,7 +94,7 @@ export const Login = () => {
                   ) : null}
                   {
                     showP ? <BiShow className="position-absolute show-hide"
-                    color="white"
+                   
                     onClick={() => {
                       setShowP(!showP)
                     }}/> :<BiHide

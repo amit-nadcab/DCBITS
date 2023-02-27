@@ -20,7 +20,7 @@ export const Navbar = () => {
             <nav className="navbar navbar-expand-lg navbar-dark ">
                 <div className="container">
                     <Link className="navbar-brand" to="/">
-                        <img src="assets/img/logo.png" className="logo" alt="logo" width="172px" height="43px" />
+                        <img src="assets/img/logo_1.png" className="logo" alt="logo" width="172px" height="43px" />
                     </Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"

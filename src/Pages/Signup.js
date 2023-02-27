@@ -9,6 +9,7 @@ import { MdEmail } from "react-icons/md";
 import { BiHide, BiShow } from "react-icons/bi";
 import { toast } from "react-toastify";
 import { registration } from "../utils/apiFunction";
+import { Header } from "../Components/Header";
 
 const initialTodos = {
   handleShowP: false,
@@ -66,7 +67,7 @@ export const Signup = () => {
   return (
     <>
       <Navbar />
-
+    {/* <Header/> */}
       <div className=" mx-auto signup-form-page page-wrapper">
         <div className=" mx-auto mt-5 mb-5">
           <div className="container">
@@ -260,7 +261,7 @@ export const Signup = () => {
                   }}
                 />
               </form>
-              <p className="text-white">
+              <p className="">
                 Already have an account? <Link to="/login" className="text-primary">sign in</Link>
               </p>
             </div>

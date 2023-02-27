@@ -121,7 +121,7 @@
    		top: 0;
    		left: 0;
    		width: 100%;
-		background-color: #0000;
+		/* background-color: #0000; */
    		/* background: -webkit-linear-gradient(45deg, rgba(144, 62, 255, 1) 0%, rgba(62, 25, 255, 1) 100%);
    		background: linear-gradient(45deg, rgba(144, 62, 255, 1) 0%, rgba(62, 25, 255, 1) 100%); */
    		/* box-shadow: 3.801px 12.432px 24px 0px rgb(150 131 225 / 40%); */

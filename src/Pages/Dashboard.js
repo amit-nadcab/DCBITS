@@ -33,7 +33,7 @@ export const Dashboard = () => {
       setWalletAddress(res?.wallets);
     });
     updateWallet(user_id).then((res) => {
-      console.log(res, "update wallet address");
+      // console.log(res, "update wallet address");
     });
     checkUserStatus(user_id).then((res) => {
       setUserStats(res?.user_data);
@@ -56,6 +56,8 @@ export const Dashboard = () => {
       setCopiedDCBT(true);
     }
   };
+
+  // console.log(userStats,"aa");
 
   return (
     <>
@@ -131,23 +133,28 @@ export const Dashboard = () => {
                 </div>
               </div>
 
-              {/* <p className="text-center  amount-value fs-6 ref-link position-relative">
-                    <span className="card-heading">Referral Link: </span>{" "}
-                    {`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
-                    <span className="ms-1">
-                      <CopyToClipboard
-                        text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
-                        onCopy={() => setCopiedRef(true)}
-                      >
-                        <span className="mx-1 small">
-                          <AiOutlineCopy color="white" cursor="pointer" />
-                        </span>
-                      </CopyToClipboard>
-                    </span>
-                    {copiedRef ? (
-                    <span className="small mx-1 text-white position-absolute">Copied</span>
-                  ) : null}
-                  </p> */}
+              {userStats?.user_status && userStats?.user_status === 1 ? (
+                 <p className="text-center  amount-value fs-6 ref-link position-relative">
+                 <span className="card-heading">Referral Link: </span>{" "}
+                 <span className="text-dark">{`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}</span>
+                 
+                 <span className="ms-1">
+                   <CopyToClipboard
+                     text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
+                     onCopy={() => setCopiedRef(true)}
+                   >
+                     <span className="mx-1 small">
+                       <AiOutlineCopy color="black" cursor="pointer" />
+                     </span>
+                   </CopyToClipboard>
+                 </span>
+                 {copiedRef ? (
+                 <span className="small mx-1 text-primary position-absolute">Copied</span>
+               ) : null}
+               </p>
+              ) : null}
+
+             
               {/* </div> */}
               {/* </div> */}
             </div>
@@ -249,7 +256,7 @@ export const Dashboard = () => {
                 {walletAddress && walletAddress?.length > 0 ? (
                   <div className="card border-0">
                     <div className="card-body wallet-card">
-                      <div className="d-flex align-items-center justify-content-between border-bottom">
+                      <div className="d-block-wallet-data align-items-center justify-content-between border-bottom">
                         <div>
                           {" "}
                           <img
@@ -257,12 +264,12 @@ export const Dashboard = () => {
                             alt="img"
                             width="25px"
                           />
-                          <span>
+                          <span >
                             {" "}
                             {walletAddress[0]?.wallet_type} Wallet Address
                           </span>
                         </div>
-                        <div className="d-flex align-items-center px-5">
+                        <div className="d-flex align-items-center px-5 wallet-address">
                           <div>
                             {" "}
                             <p className="address-text position-realative">
@@ -297,7 +304,7 @@ export const Dashboard = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="d-flex align-items-center justify-content-between">
+                      <div className="d-block-wallet-data align-items-center justify-content-between">
                         <div>
                           {" "}
                           <img
@@ -310,7 +317,7 @@ export const Dashboard = () => {
                             {walletAddress[1]?.wallet_type} Wallet Address
                           </span>
                         </div>
-                        <div className="d-flex align-items-center px-5">
+                        <div className="d-flex align-items-center px-5 wallet-address">
                           <div>
                             <p className="address-text position-realative">
                               {walletAddress[1]?.wallet_address.slice(0, 10) +

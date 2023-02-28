@@ -35,7 +35,7 @@ export const Login = () => {
       <div className=" mx-auto signup-form-page page-wrapper">
         <div className=" mt-5 mb-5">
           <div className="container">
-            <div className="col-md-4 signup-form mx-auto">
+            <div className="col-lg-4 col-md-6 col-sm-6 signup-form mx-auto">
               <div className="header">
                 <h1>Login</h1>
               </div>

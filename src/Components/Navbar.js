@@ -35,20 +35,20 @@ export const Navbar = () => {
                                     (
                                         <>
                                             <li className="nav-item">
-                                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                                                <Link className="nav-link text-primary" to="/dashboard">Dashboard</Link>
                                             </li>
                                             <li className="nav-item">
-                                                <Link className="nav-link" to="" onClick={()=> handleLogout()}>Logout</Link>
+                                                <Link className="nav-link text-primary" to="" onClick={()=> handleLogout()}>Logout</Link>
                                             </li>
                                         </>
                                     )
                                     : (
                                         <>
                                             <li className="nav-item">
-                                                <Link className="nav-link" to="/login">Login</Link>
+                                                <Link className="nav-link text-primary" to="/login">Login</Link>
                                             </li>
                                             <li className="nav-item">
-                                                <Link className="nav-link" to="/signup">SignUp</Link>
+                                                <Link className="nav-link text-primary" to="/signup">SignUp</Link>
                                             </li>
                                         </>
                                     )

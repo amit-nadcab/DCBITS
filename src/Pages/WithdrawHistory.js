@@ -46,7 +46,7 @@ export const WithdrawHistory = () => {
                   })
                 ) : (
                   <tbody className="">
-                    <div className="text-dark text-center">No Data Found</div>
+                    <p className="text-dark text-center w-100">No Data Found</p>
                   </tbody>
                 )}
               </tbody>

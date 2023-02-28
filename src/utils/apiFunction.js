@@ -97,6 +97,14 @@ export const checkUserStatus = async(user_id)=>{
   }
 }
 
+export const getReferralHistroy = async(user_id)=>{
+  try {
+      const data = await axios.post(`${BASE_URL}/reffral-history`,{user_id: user_id})
+      return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
 export const getInvestmentHistory = async(user_id)=>{
   try {
       const data = await axios.post(`${BASE_URL}/investment-history`,{user_id: user_id})

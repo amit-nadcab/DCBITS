@@ -4,7 +4,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducer";
 import { toast } from "react-toastify";
-import {FiMenu} from 'react-icons/fi'
+import { FiMenu } from "react-icons/fi";
 
 export const Header = () => {
   const { user_id, isLoggedIn } = useSelector((state) => state.data.value);
@@ -19,7 +19,7 @@ export const Header = () => {
     <div className="mein-menu">
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="/">
+          <Link className="navbar-brand" to="/home">
             <img
               src="assets/img/logo_1.png"
               className="logo"
@@ -37,7 +37,9 @@ export const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"><FiMenu color="black"/></span>
+            <span className="navbar-toggler-icon">
+              <FiMenu color="black" />
+            </span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav m-auto">
@@ -59,42 +61,44 @@ export const Header = () => {
                     </Link>
                   </li>
                   <li className="nav-item px-5">
-                    <Link className="nav-link" to="/dashboard">
+                    <Link className="nav-link" to="/referralIncome">
                       Referral Income
                     </Link>
                   </li>
                 </>
               ) : null}
             </ul>
-            <div className="d-flex">
-              <div className="text-dark ">
-              <ul className="navbar-nav">
-                            {
-                                isLoggedIn ?
-                                    (
-                                        <>
-                                            <li className="nav-item">
-                                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
-                                            </li>
-                                            <li className="nav-item">
-                                                <Link className="nav-link" to="" onClick={()=> handleLogout()}>Logout</Link>
-                                            </li>
-                                        </>
-                                    )
-                                    : (
-                                        <>
-                                            <li className="nav-item">
-                                                <Link className="nav-link" to="/login">Login</Link>
-                                            </li>
-                                            <li className="nav-item">
-                                                <Link className="nav-link" to="/signup">SignUp</Link>
-                                            </li>
-                                        </>
-                                    )
-                            }
-
-                        </ul>
-                {/* <div class="dropdown">
+            {/* <div className="d-flex">
+              <div className="text-dark "> */}
+            <ul className="navbar-nav m-auto">
+              {isLoggedIn ? (
+                <>
+                  <li className="nav-item px-5">
+                    <Link
+                      className="nav-link"
+                      to=""
+                      onClick={() => handleLogout()}
+                    >
+                      Logout
+                    </Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link px-5" to="/login">
+                      Login
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link px-5" to="/signup">
+                      SignUp
+                    </Link>
+                  </li>
+                </>
+              )}
+            </ul>
+            {/* <div class="dropdown">
                   <a
                     class="btn btn-secondary dropdown-toggle"
                     href="#"
@@ -129,8 +133,8 @@ export const Header = () => {
                     )}
                   </ul>
                 </div> */}
-              </div>
-            </div>
+            {/* </div>
+            </div> */}
           </div>
         </div>
       </nav>

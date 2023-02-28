@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/reducer'
 import { toast } from "react-toastify";
+import {FiMenu} from 'react-icons/fi'
 
 export const Navbar = () => {
     const dispatch = useDispatch()
@@ -25,7 +26,7 @@ export const Navbar = () => {
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
                         aria-label="Toggle navigation">
-                        <span className="navbar-toggler-icon"></span>
+                        <span className="navbar-toggler-icon"><FiMenu color="black"/></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul className="navbar-nav">

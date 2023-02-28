@@ -4,6 +4,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducer";
 import { toast } from "react-toastify";
+import {FiMenu} from 'react-icons/fi'
 
 export const Header = () => {
   const { user_id, isLoggedIn } = useSelector((state) => state.data.value);
@@ -36,7 +37,7 @@ export const Header = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span className="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"><FiMenu color="black"/></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav m-auto">
@@ -67,7 +68,33 @@ export const Header = () => {
             </ul>
             <div className="d-flex">
               <div className="text-dark ">
-                <div class="dropdown">
+              <ul className="navbar-nav">
+                            {
+                                isLoggedIn ?
+                                    (
+                                        <>
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to="/dashboard">Dashboard</Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to="" onClick={()=> handleLogout()}>Logout</Link>
+                                            </li>
+                                        </>
+                                    )
+                                    : (
+                                        <>
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to="/login">Login</Link>
+                                            </li>
+                                            <li className="nav-item">
+                                                <Link className="nav-link" to="/signup">SignUp</Link>
+                                            </li>
+                                        </>
+                                    )
+                            }
+
+                        </ul>
+                {/* <div class="dropdown">
                   <a
                     class="btn btn-secondary dropdown-toggle"
                     href="#"
@@ -101,7 +128,7 @@ export const Header = () => {
                       </>
                     )}
                   </ul>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

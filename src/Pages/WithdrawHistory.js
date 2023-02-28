@@ -21,12 +21,12 @@ export const WithdrawHistory = () => {
       <Header />
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
-          <h2 className="text-center text-secondary">Withdraw History</h2>
-          <div className="table-responsive mt-5">
+          <h4 className="text-center text-secondary">Withdraw History</h4>
+          <div className="table-responsive mt-5 p-3" style={{ background: "#FFF", border: "1px solid white", borderRadius: "10px" }}>
             <table className="table table-borderless table-striped">
-              <thead className="text-center" style={{ background: "#6A35FF" }}>
-                <tr className="text-white">
-                  <th scope="col">Sr.</th>
+              <thead className="text-center" style={{ background: "#F4F5F9",border: "1px solid white", borderRadius: "10px" }}>
+                <tr className="text-dark">
+                  <th scope="col">Sr</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Date</th>
                   <th scope="col">Hash</th>
@@ -46,7 +46,7 @@ export const WithdrawHistory = () => {
                   })
                 ) : (
                   <tbody className="">
-                    <div className="text-white text-center">No Data Found</div>
+                    <div className="text-dark text-center">No Data Found</div>
                   </tbody>
                 )}
               </tbody>

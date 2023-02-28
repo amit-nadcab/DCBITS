@@ -388,32 +388,55 @@ a {
   padding: 16px 20px 16px 20px;
 }
 
-.roi-expexted{
-  background: #EFFFEE;
-    padding: 10px;
-    border-radius: 5px;
+.roi-expexted {
+  background: #efffee;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.create-wallet{
-    background-image: url(/public/assets/img/Frame\ 4.svg)  ;
-    background-repeat: no-repeat;
-    background-size: contain;
-    
+.create-wallet {
+  background-image: url(/public/assets/img/Frame\ 4.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.form-control{
-  background-color: #EEF0F1;
+.form-control {
+  background-color: #eef0f1;
   border-radius: 12px;
 }
 
-.form-lalbe-text{
-  color: #BABABA;
+.form-lalbe-text {
+  color: #bababa;
   font-size: 16px !important;
 }
-
+.address-text {
+  color: #9f9f9f;
+}
+.color-g{
+  color: #3D9236;
+  background-color: #3d923626;
+  border-radius: 5px;
+  padding: 3px;
+}
+.color-o {
+  color: #E56E00;
+  background-color: #e56e0033;
+  border-radius: 5px;
+  padding: 3px;
+}
+.d-block-ai-assitent{
+  display: flex;
+}
 @media only screen and (max-width: 768px) {
   .card-mob {
     padding: 10px;
+  }
+  .d-block-ai-assitent{
+    display: block;
+  }
+  #ai-assisent-img{
+    display: none;
+    margin: 0px !important;
   }
 }
 

@@ -39,7 +39,8 @@ export const ReferralIncome = () => {
                     return (
                       <tr>
                         <td>{i+1}</td>
-                        <td className="td-min-with">{`${e?.amount} USDT`}</td>
+                        <td className="td-min-with">
+                          {`${e?.amount} USDT`}</td>
                         {/* <td className="td-min-with">{e?.income_from}</td> */}
                         <td>{test.toLocaleDateString()}</td>
                       </tr>

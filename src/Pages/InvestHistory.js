@@ -23,10 +23,10 @@ export const InvestHistory = () => {
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
           <h4 className="text-center text-secondary">Investment History</h4>
-          <div className="table-responsive mt-5 p-3" style={{ background: "#FFF", border: "1px solid white", borderRadius: "10px" }}>
+          <div className="table-responsive mt-5 p-3" style={{ background: "#FFF", border: "1px solid white", borderRadius: "12px" }}>
             <table className="table table-borderless" style={{ background: "#FFF" }}>
-              <thead className="text-center" style={{ background: "#F4F5F9",border: "1px solid white", borderRadius: "10px" }}>
-                <tr className="text-dark">
+              <thead className="text-center" style={{ background: "#F4F5F9",border: "1px solid white", borderRadius: "12px" }}>
+                <tr className="text-dark" style={{border: "1px solid white",borderRadius: "12px" }}>
                   <th scope="col">No</th>
                   <th scope="col">Amount</th>
                   <th scope="col">Investment Type</th>

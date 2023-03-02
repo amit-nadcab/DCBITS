@@ -22,9 +22,9 @@ export const WithdrawHistory = () => {
       <div className="page-wrapper pt-5">
         <div className="container pt-5">
           <h4 className="text-center text-secondary">Withdraw History</h4>
-          <div className="table-responsive mt-5 p-3" style={{ background: "#FFF", border: "1px solid white", borderRadius: "10px" }}>
+          <div className="table-responsive mt-5 p-3" style={{ background: "#FFF", border: "1px solid white", borderRadius: "12px" }}>
             <table className="table table-borderless table-striped">
-              <thead className="text-center" style={{ background: "#F4F5F9",border: "1px solid white", borderRadius: "10px" }}>
+              <thead className="text-center" style={{ background: "#F4F5F9",border: "1px solid white", borderRadius: "12px" }}>
                 <tr className="text-dark">
                   <th scope="col">Sr</th>
                   <th scope="col">Amount</th>

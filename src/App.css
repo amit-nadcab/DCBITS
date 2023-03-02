@@ -399,6 +399,13 @@ a {
   background-image: url(/public/assets/img/Frame\ 4.svg);
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 12px;
+}
+.create-wallet-1 {
+  background-image: url(/public/assets/img/frame.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 12px;
 }
 
 .form-control {

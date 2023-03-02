@@ -482,6 +482,13 @@ padding: 0px 48px;
 cursor: pointer;
 }
 
+.mobile-stats-key{
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 45px;
+}
+
 @media only screen and (max-width: 768px) {
   .card-mob {
     padding: 10px;
@@ -501,12 +508,19 @@ cursor: pointer;
     justify-content: center;
   }
   .ref-link-text {
-    color: #000000;
+    color: #ffffff;
     font-size: 0.9rem;
   }
   .ai-wrap {
     text-align: center;
     margin-bottom: 12px;
+  }
+  .ref-link{
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .card-heading {
+    font-size: 20px;
+    color: #ffffff;
   }
 }
 
@@ -514,10 +528,10 @@ cursor: pointer;
   .deposit_img {
     display: none;
   }
-  .card-heading {
+  /* .card-heading {
     font-size: 20px;
     color: #787878;
-  }
+  } */
   .wallet-card {
     text-align: center;
   }

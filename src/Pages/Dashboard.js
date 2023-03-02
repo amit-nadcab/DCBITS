@@ -89,6 +89,7 @@ export const Dashboard = () => {
         <div className="container-fluid">
           {window.innerWidth < 768 ? (
             mainBtn ? (
+              <>
               <div
                 className="row px-3"
                 style={{
@@ -140,67 +141,6 @@ export const Dashboard = () => {
                         USDT
                       </p>
                     </div>
-
-                    {/* <div className="col-md-2 col-6 text-center card-mob">
-                        <span className="d-flex align-items-center justify-content-center">
-                          <div className="stat-card-dot-g"></div>{" "}
-                          <p className="ms-1"> Total Earning</p>
-                        </span>
-                        <b className="h3">
-                          {userStats?.roi_income || userStats?.referral_income
-                            ? roundTo(
-                                Number(
-                                  userStats?.roi_income +
-                                    Number(userStats?.referral_income)
-                                ),
-                                4
-                              )
-                            : 0}{" "}
-                          USDT
-                        </b>
-                      </div>
-                      <div className="col-md-2 col-6 border-start text-center card-mob">
-                        <span className="d-flex align-items-center justify-content-center">
-                          <div className="stat-card-dot-b"></div>{" "}
-                          <p className="ms-1"> Total Investment</p>
-                        </span>
-                        <b className="h3">
-                          {totalInvest ? roundTo(totalInvest, 4) : 0} USDT
-                        </b>
-                      </div>
-                      <div className="col-md-2 col-6 border-start text-center card-mob">
-                        <span className="d-flex align-items-center justify-content-center">
-                          <div className="stat-card-dot-r"></div>{" "}
-                          <p className="ms-1"> Total ROI Income</p>
-                        </span>
-                        <b className="h3">
-                          {userStats?.roi_income
-                            ? roundTo(userStats?.roi_income, 4)
-                            : 0}{" "}
-                          USDT
-                        </b>
-                      </div>
-                      <div className="col-md-2 col-6 border-start text-center card-mob">
-                        <span className="d-flex align-items-center justify-content-center">
-                          <div className="stat-card-dot-o"></div>{" "}
-                          <p className="ms-1"> Total Direct Members</p>
-                        </span>
-                        <b className="h3">
-                          {userStats?.directs ? userStats?.directs : 0}
-                        </b>
-                      </div>
-                      <div className="col-md-2 col-12 border-start text-center card-mob">
-                        <span className="d-flex align-items-center justify-content-center">
-                          <div className="stat-card-dot-p"></div>{" "}
-                          <p className="ms-1"> Total Level Income</p>
-                        </span>
-                        <b className="h3">
-                          {userStats?.referral_income
-                            ? roundTo(userStats?.referral_income, 4)
-                            : 0}{" "}
-                          USDT
-                        </b>
-                      </div> */}
                   </div>
                 </div>
 
@@ -233,6 +173,38 @@ export const Dashboard = () => {
                 {/* </div> */}
                 {/* </div> */}
               </div>
+              <div  className="row px-3"
+               > 
+              <div className="mt-3 mb-3" >
+                  <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
+                    <h6 className="text-white">
+                      Invite your friend and get{" "}
+                      <span className="text-warning"> $10</span>
+                    </h6>
+                    <p className="text-white">
+                      Effortlessly manage your finance with us
+                    </p>
+
+                    <CopyToClipboard
+                      text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
+                      onCopy={() => setCopiedRef(true)}
+                    >
+                      <span className="mx-1 small">
+                        <button className="btn btn-light mt-2">
+                          Copy Link
+                        </button>
+                        {copiedRef ? (
+                    <span className="small mx-1" style={{ color: "white" }}>
+                      Copied
+                    </span>
+                  ) : null}
+                      </span>
+                    </CopyToClipboard>
+                  </div>
+                 
+                </div>
+                </div>
+              </>
             ) : null
           ) : (
             <div className="row mx-1">
@@ -331,6 +303,8 @@ export const Dashboard = () => {
               {/* </div> */}
             </div>
           )}
+
+
 
           <div className="row mt-4 mb-3">
             <div className="col-md-8 mt-3">
@@ -613,7 +587,7 @@ export const Dashboard = () => {
                         </div>
                         <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
                           <h6 className="text-white">
-                            Invite your friend and get {" "}
+                            Invite your friend and get{" "}
                             <span className="text-warning"> $10</span>
                           </h6>
                           <p className="text-white">
@@ -858,12 +832,13 @@ export const Dashboard = () => {
                           Create Wallet
                         </button>
                       </div>
-                      
                     </>
                   )}
                 </div>
                 {/* 11 */}
-                <div className="mt-3">
+                {
+                  userStats?.user_status === 1 ? 
+                  <div className="mt-3">
                   <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
                     <h6 className="text-white">
                       Invite your friend and get{" "}
@@ -881,10 +856,18 @@ export const Dashboard = () => {
                         <button className="btn btn-light mt-2">
                           Copy Link
                         </button>
+                        {copiedRef ? (
+                    <span className="small mx-1" style={{ color: "white" }}>
+                      Copied
+                    </span>
+                  ) : null}
                       </span>
                     </CopyToClipboard>
                   </div>
-                </div>
+                 
+                </div> : null
+                }
+                
               </div>
             )}
           </div>

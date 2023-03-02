@@ -500,6 +500,13 @@ cursor: pointer;
   border-radius: 8px;
  padding: 5px;
 }
+
+/* .call{
+  background-image: url(http://localhost:3000/static/media/frame.fb0527c….svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+} */
 @media only screen and (max-width: 768px) {
   .card-mob {
     padding: 10px;

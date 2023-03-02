@@ -87,10 +87,10 @@ export const Dashboard = () => {
         ) : null}
 
         <div className="container-fluid">
-          <div className="row">
+          
             {window.innerWidth < 768 ? (
               mainBtn ? (
-                <div className="row mx-0" style={{background: "linear-gradient(146.85deg, #5059F4 -13.31%, #E1ECFE -13.31%, #5451FF 36.91%, #3A48F5 85.7%)"}}>
+                <div className="row px-3" style={{background: "linear-gradient(146.85deg, #5059F4 -13.31%, #E1ECFE -13.31%, #5451FF 36.91%, #3A48F5 85.7%)"}}>
                   <div className="col-md-12 col-12">
                     <div className="row  align-items-center justify-content-between py-4 mt-5 dummy-data" style={{background: "rgba(255, 255, 255, 0.2)"}}>
                       <div className="col-6">
@@ -314,7 +314,7 @@ export const Dashboard = () => {
               </div>
             )}
 
-            <div className="row mt-4">
+            <div className="row mt-4 mb-3">
               <div className="col-md-8 mt-3">
                 <div className="d-block-ai-assitent justify-content-between align-items-center ai-banner">
                   <div className="d-flex align-items-center ai-wrap">
@@ -347,7 +347,7 @@ export const Dashboard = () => {
                 </div>
                 {window.innerWidth < 768 ? (
                   mainBtn ? (
-                    <div className="ai-banner mt-3">
+                    <div className="ai-banner mt-3 mb-3">
                       <TradingViewWidget
                         symbol="BINANCE:BTCUSDT"
                         height="450px"
@@ -356,7 +356,7 @@ export const Dashboard = () => {
                     </div>
                   ) : null
                 ) : (
-                  <div className="ai-banner mt-3">
+                  <div className="ai-banner mt-3 mb-2">
                     <TradingViewWidget
                       symbol="BINANCE:BTCUSDT"
                       height="450px"
@@ -825,7 +825,7 @@ export const Dashboard = () => {
                 </div>
               )}
             </div>
-          </div>
+        
         </div>
       </div>
       <div

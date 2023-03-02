@@ -488,7 +488,11 @@ cursor: pointer;
   font-weight: 500;
   line-height: 45px;
 }
-
+.navbar-toggler-icon{
+  background-color: #EEEEEE;
+  border-radius: 8px;
+ padding: 5px;
+}
 @media only screen and (max-width: 768px) {
   .card-mob {
     padding: 10px;

@@ -1,9 +1,13 @@
+
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TradingViewWidget from "react-tradingview-widget";
+import Dropdown from "react-bootstrap/Dropdown";
+
 
 import { Footer } from "../Components/Footer";
 import { Header } from "../Components/Header";
+import { WalletAddressAlert } from "../Components/walletAddressAlert";
 import { Sidebar } from "../Components/Sidebar";
 import { AiFillCopy } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
@@ -29,7 +33,15 @@ export const Dashboard = () => {
   const [totalInvest, setTotalInvest] = useState(0);
   const [mainBtn, setMainBtn] = useState(true);
 
+  const [withdrawValue, setWithdrawValue] = useState('')
+  const [withdrawAddress, setWithdrawAddress] = useState('')
+  const [showAddressError, setShowAddressError] = useState(false)
+  const [showAmountError, setShowAmountError] = useState(false)
+
+ 
+
   useEffect(() => {
+    
     getWalletAddress(user_id).then((res) => {
       setWalletAddress(res?.wallets);
     });
@@ -57,8 +69,27 @@ export const Dashboard = () => {
       setCopiedDCBT(true);
     }
   };
+  const handleSelect=(e)=>{
+    console.log(e);
+    if(e === 'roiIncome'){
+      setWithdrawValue(userStats?.roi_income)
+    }
+    if(e === 'referralIncome'){
+      setWithdrawValue(userStats?.referral_income)
+    }
+    
+  }
+  const handleWithdraw = ()=>{
+    if(withdrawAddress === ''){
+      setShowAddressError(true)
+    }
+    if(withdrawValue===''){
+      setShowAmountError(true)
+    }
+    console.log(withdrawAddress,"withdrawAddress");
+  }
 
-  // console.log(userStats,"aa");
+
 
   return (
     <>
@@ -90,119 +121,91 @@ export const Dashboard = () => {
           {window.innerWidth < 768 ? (
             mainBtn ? (
               <>
-              <div
-                className="row px-3"
-                style={{
-                  background:
-                    "linear-gradient(146.85deg, #5059F4 -13.31%, #E1ECFE -13.31%, #5451FF 36.91%, #3A48F5 85.7%)",
-                }}
-              >
-                <div className="col-md-12 col-12">
-                  <div
-                    className="row mb-4  align-items-center justify-content-between py-4 mt-5 dummy-data"
-                    style={{ background: "rgba(255, 255, 255, 0.2)" }}
-                  >
-                    <div className="col-6">
-                      <p className="mobile-stats-key">Total Earning</p>
-                      <p className="mobile-stats-key">Total Investment</p>
-                      <p className="mobile-stats-key">Total ROI Income</p>
-                      <p className="mobile-stats-key">Total Direct Members</p>
-                      <p className="mobile-stats-key">Total Level Income</p>
-                    </div>
-                    <div className="col-6">
-                      <p className="text-center mobile-stats-key">
-                        {userStats?.roi_income || userStats?.referral_income
-                          ? roundTo(
-                              Number(
-                                userStats?.roi_income +
-                                  Number(userStats?.referral_income)
-                              ),
-                              4
-                            )
-                          : 0}{" "}
-                        USDT
-                      </p>
-                      <p className="text-center mobile-stats-key">
-                        {totalInvest ? roundTo(totalInvest, 4) : 0} USDT
-                      </p>
-                      <p className="text-center mobile-stats-key">
-                        {userStats?.roi_income
-                          ? roundTo(userStats?.roi_income, 4)
-                          : 0}{" "}
-                        USDT
-                      </p>
-                      <p className="text-center mobile-stats-key">
-                        {userStats?.directs ? userStats?.directs : 0}
-                      </p>
-                      <p className="text-center mobile-stats-key">
-                        {userStats?.referral_income
-                          ? roundTo(userStats?.referral_income, 4)
-                          : 0}{" "}
-                        USDT
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* {userStats?.user_status && userStats?.user_status === 1 ? (
-                  <>
-                    <p className="text-center  amount-value fs-6 ref-link position-relative mb-3">
-                      <span className="card-heading d-block">
-                        Referral Link:{" "}
-                      </span>{" "}
-                      <span className="ref-link-text">{`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}</span>
-                      <span className="ms-1">
-                        <CopyToClipboard
-                          text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
-                          onCopy={() => setCopiedRef(true)}
-                        >
-                          <span className="mx-1 small">
-                            <AiFillCopy color="#394CF4" cursor="pointer" />
-                          </span>
-                        </CopyToClipboard>
-                      </span>
-                      {copiedRef ? (
-                        <span className="small mx-1 text-primary position-absolute">
-                          Copied
-                        </span>
-                      ) : null}
-                    </p>
-                  </>
-                ) : null} */}
-
-                {/* </div> */}
-                {/* </div> */}
-              </div>
-              <div  className="row px-3"
-               > 
-              <div className="mt-3 mb-3" >
-                  <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
-                    <h6 className="text-white">
-                      Invite your friend and get{" "}
-                      <span className="text-warning"> $10</span>
-                    </h6>
-                    <p className="text-white">
-                      Effortlessly manage your finance with us
-                    </p>
-
-                    <CopyToClipboard
-                      text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
-                      onCopy={() => setCopiedRef(true)}
+                <div
+                  className="row px-3"
+                  style={{
+                    background:
+                      "linear-gradient(146.85deg, #5059F4 -13.31%, #E1ECFE -13.31%, #5451FF 36.91%, #3A48F5 85.7%)",
+                  }}
+                >
+                  <div className="col-md-12 col-12">
+                    <div
+                      className="row mb-4  align-items-center justify-content-between py-4 mt-5 dummy-data"
+                      style={{ background: "rgba(255, 255, 255, 0.2)" }}
                     >
-                      <span className="mx-1 small">
-                        <button className="btn btn-light mt-2">
-                          Copy Link
-                        </button>
-                        {copiedRef ? (
-                    <span className="small mx-1" style={{ color: "white" }}>
-                      Copied
-                    </span>
-                  ) : null}
-                      </span>
-                    </CopyToClipboard>
+                      <div className="col-6">
+                        <p className="mobile-stats-key">Total Earning</p>
+                        <p className="mobile-stats-key">Total Investment</p>
+                        <p className="mobile-stats-key">Total ROI Income</p>
+                        <p className="mobile-stats-key">Total Direct Members</p>
+                        <p className="mobile-stats-key">Total Level Income</p>
+                      </div>
+                      <div className="col-6">
+                        <p className="text-center mobile-stats-key">
+                          {userStats?.roi_income || userStats?.referral_income
+                            ? roundTo(
+                                Number(
+                                  userStats?.roi_income +
+                                    Number(userStats?.referral_income)
+                                ),
+                                4
+                              )
+                            : 0}{" "}
+                          USDT
+                        </p>
+                        <p className="text-center mobile-stats-key">
+                          {totalInvest ? roundTo(totalInvest, 4) : 0} USDT
+                        </p>
+                        <p className="text-center mobile-stats-key">
+                          {userStats?.roi_income
+                            ? roundTo(userStats?.roi_income, 4)
+                            : 0}{" "}
+                          USDT
+                        </p>
+                        <p className="text-center mobile-stats-key">
+                          {userStats?.directs ? userStats?.directs : 0}
+                        </p>
+                        <p className="text-center mobile-stats-key">
+                          {userStats?.referral_income
+                            ? roundTo(userStats?.referral_income, 4)
+                            : 0}{" "}
+                          USDT
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                 
                 </div>
+                <div className="row px-3">
+                  <div className="mt-3 mb-3">
+                    <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
+                      <h6 className="text-white">
+                        Invite your friend and get{" "}
+                        <span className="text-warning"> $10</span>
+                      </h6>
+                      <p className="text-white">
+                        Effortlessly manage your finance with us
+                      </p>
+
+                      <CopyToClipboard
+                        text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
+                        onCopy={() => setCopiedRef(true)}
+                      >
+                        <span className="mx-1 small">
+                          <button className="btn btn-light mt-2">
+                            Copy Link
+                          </button>
+                          {copiedRef ? (
+                            <span
+                              className="small mx-1"
+                              style={{ color: "white" }}
+                            >
+                              Copied
+                            </span>
+                          ) : null}
+                        </span>
+                      </CopyToClipboard>
+                    </div>
+                  </div>
                 </div>
               </>
             ) : null
@@ -272,39 +275,8 @@ export const Dashboard = () => {
                   </div>
                 </div>
               </div>
-
-              {/* {userStats?.user_status && userStats?.user_status === 1 ? (
-                <>
-                  <p className="text-center  amount-value fs-6 ref-link position-relative">
-                    <span className="card-heading d-block">
-                      Referral Link:{" "}
-                    </span>{" "}
-                    <span className="ref-link-text">{`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}</span>
-                    <span className="ms-1">
-                      <CopyToClipboard
-                        text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
-                        onCopy={() => setCopiedRef(true)}
-                      >
-                        <span className="mx-1 small">
-                          <AiFillCopy color="#394CF4" cursor="pointer" />
-                        </span>
-                      </CopyToClipboard>
-                    </span>
-                    {copiedRef ? (
-                      <span className="small mx-1 text-primary position-absolute">
-                        Copied
-                      </span>
-                    ) : null}
-                  </p>
-                </>
-              ) : null} */}
-
-              {/* </div> */}
-              {/* </div> */}
             </div>
           )}
-
-
 
           <div className="row mt-4 mb-3">
             <div className="col-md-8 mt-3">
@@ -380,14 +352,41 @@ export const Dashboard = () => {
 
                     <form className="mt-2">
                       <div className="mb-3">
+                      <div className="d-flex justify-content-between">
                         <label
                           for="exampleInputEmail1"
                           className="form-label form-lalbe-text"
                         >
                           Wallet Address
                         </label>
+                        <label
+                          for="exampleInputEmail1"
+                          className="form-label form-lalbe-text"
+                        >
+                          <Dropdown
+                          onSelect={handleSelect}
+                          >
+                            <Dropdown.Toggle
+                              variant="Secondary"
+                              id="dropdown-basic" 
+                              size="sm"
+                            >
+                              Income Type
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                              <Dropdown.Item eventKey={"roiIncome"}>
+                                ROI
+                              </Dropdown.Item>
+                              <Dropdown.Item eventKey={"referralIncome"}>
+                                Referral
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </label>
+                      </div>
                         <input
-                          type="email"
+                          type="text"
                           className="form-control"
                           id="exampleInputEmail1"
                           aria-describedby="emailHelp"
@@ -401,10 +400,14 @@ export const Dashboard = () => {
                           Amount
                         </label>
                         <input
-                          type="text"
-                          className="form-control"
-                          id="exampleInputPassword1"
-                        />
+                        type="text"
+                        className="form-control"
+                        id="exampleInputPassword1"
+                        value={withdrawValue}
+                        onChange={(e)=>{
+                          setWithdrawValue(e.target.value)
+                        }}
+                      />
                       </div>
                       <div className="mb-3">
                         <div className="text-center">
@@ -414,7 +417,7 @@ export const Dashboard = () => {
                           >
                             Fees:
                           </label>
-                          {""} 0
+                          {""} $1
                         </div>
                       </div>
                       <div className="d-grid gap-2 mt-5">
@@ -613,28 +616,61 @@ export const Dashboard = () => {
             ) : (
               <div className="col-md-4 mt-3">
                 <div className="ai-banner">
-                  <div className="d-flex justify-content-between">
+                  <div className="d-flex justify-content-start align-items-center">
                     <div>
                       <img src="assets/img/icon1.png" alt="img" width="25px" />{" "}
                       Withdraw
                     </div>
-                    <div>{/* <RxCross2/> Clear data */}</div>
+                    <div className="ms-2"><WalletAddressAlert/></div>
+                    {/* <div><RxCross2/> Clear data</div> */}
                   </div>
 
                   <form className="mt-2">
                     <div className="mb-3">
-                      <label
-                        for="exampleInputEmail1"
-                        className="form-label form-lalbe-text"
-                      >
-                        Wallet Address
-                      </label>
+                      <div className="d-flex justify-content-between">
+                        <label
+                          for="exampleInputEmail1"
+                          className="form-label form-lalbe-text"
+                        >
+                          Wallet Address
+                        </label>
+                        <label
+                          for="exampleInputEmail1"
+                          className="form-label form-lalbe-text"
+                        >
+                          <Dropdown
+                          onSelect={handleSelect}
+                          >
+                            <Dropdown.Toggle
+                              variant="Secondary"
+                              id="dropdown-basic" 
+                              size="sm"
+                            >
+                              Income Type
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                              <Dropdown.Item eventKey={"roiIncome"}>
+                                ROI
+                              </Dropdown.Item>
+                              <Dropdown.Item eventKey={"referralIncome"}>
+                                Referral
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </label>
+                      </div>
                       <input
-                        type="email"
+                        type="text"
                         className="form-control"
                         id="exampleInputEmail1"
                         aria-describedby="emailHelp"
+                        value={withdrawAddress}
+                        onChange={(e)=>{
+                          setWithdrawAddress(e.target.value)
+                        }}
                       />
+                     {showAddressError ? <p className="error-msg">Enter Address</p> : null} 
                     </div>
                     <div className="mb-3">
                       <label
@@ -647,7 +683,13 @@ export const Dashboard = () => {
                         type="text"
                         className="form-control"
                         id="exampleInputPassword1"
+                        value={withdrawValue}
+                        onChange={(e)=>{
+                          setWithdrawValue(e.target.value)
+                        }}
                       />
+                      {showAmountError ? <p className="error-msg">Enter Amount</p> : null}
+                      
                     </div>
                     <div className="mb-3">
                       <div className="text-center">
@@ -657,26 +699,17 @@ export const Dashboard = () => {
                         >
                           Fees:
                         </label>
-                        {""} 0
+                        {""} $1
                       </div>
-                      {/* <label
-                          for="exampleInputEmail1"
-                          className="form-label form-lalbe-text"
-                        >
-                          Fees
-                        </label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        /> */}
                     </div>
                     <div className="d-grid gap-2 mt-5">
                       <button
                         className="btn"
                         type="button"
                         style={{ background: "#394CF4", color: "white" }}
+                        onClick={()=>{
+                          handleWithdraw()
+                        }}
                       >
                         Withdraw Amount
                       </button>
@@ -836,38 +869,38 @@ export const Dashboard = () => {
                   )}
                 </div>
                 {/* 11 */}
-                {
-                  userStats?.user_status === 1 ? 
+                {userStats?.user_status === 1 ? (
                   <div className="mt-3">
-                  <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
-                    <h6 className="text-white">
-                      Invite your friend and get{" "}
-                      <span className="text-warning"> $10</span>
-                    </h6>
-                    <p className="text-white">
-                      Effortlessly manage your finance with us
-                    </p>
+                    <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
+                      <h6 className="text-white">
+                        Invite your friend and get{" "}
+                        <span className="text-warning"> $10</span>
+                      </h6>
+                      <p className="text-white">
+                        Effortlessly manage your finance with us
+                      </p>
 
-                    <CopyToClipboard
-                      text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
-                      onCopy={() => setCopiedRef(true)}
-                    >
-                      <span className="mx-1 small">
-                        <button className="btn btn-light mt-2">
-                          Copy Link
-                        </button>
-                        {copiedRef ? (
-                    <span className="small mx-1" style={{ color: "white" }}>
-                      Copied
-                    </span>
-                  ) : null}
-                      </span>
-                    </CopyToClipboard>
+                      <CopyToClipboard
+                        text={`${BASE_URL_1}/signup?id=${userStats?.self_ref_code}`}
+                        onCopy={() => setCopiedRef(true)}
+                      >
+                        <span className="mx-1 small">
+                          <button className="btn btn-light mt-2">
+                            Copy Link
+                          </button>
+                          {copiedRef ? (
+                            <span
+                              className="small mx-1"
+                              style={{ color: "white" }}
+                            >
+                              Copied
+                            </span>
+                          ) : null}
+                        </span>
+                      </CopyToClipboard>
+                    </div>
                   </div>
-                 
-                </div> : null
-                }
-                
+                ) : null}
               </div>
             )}
           </div>

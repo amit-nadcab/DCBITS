@@ -28,7 +28,7 @@ export const ReferralIncome = () => {
                 <tr className="text-dark">
                   <th scope="col">No</th>
                   <th scope="col">Amount</th>
-                  {/* <th scope="col">User ID</th> */}
+                  <th scope="col">Level</th>
                   <th scope="col">Date</th>
                 </tr>
               </thead>  
@@ -41,7 +41,7 @@ export const ReferralIncome = () => {
                         <td>{i+1}</td>
                         <td className="td-min-with">
                           {`${e?.amount} USDT`}</td>
-                        {/* <td className="td-min-with">{e?.income_from}</td> */}
+                        <td className="td-min-with">{e?.level}</td>
                         <td>{test.toLocaleDateString()}</td>
                       </tr>
                     );

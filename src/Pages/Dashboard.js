@@ -1,13 +1,13 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TradingViewWidget from "react-tradingview-widget";
 import Dropdown from "react-bootstrap/Dropdown";
 
-
 import { Footer } from "../Components/Footer";
 import { Header } from "../Components/Header";
 import { WalletAddressAlert } from "../Components/walletAddressAlert";
+import { TransactionSuccessful } from "../Components/TransactionSuccessful";
+import { TransactionCancled } from "../Components/TransactionCancled";
 import { Sidebar } from "../Components/Sidebar";
 import { AiFillCopy } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
@@ -29,19 +29,17 @@ export const Dashboard = () => {
   const [copiedDCBT, setCopiedDCBT] = useState(false);
   const [copiedRef, setCopiedRef] = useState(false);
   const [showOtp, setShowOtp] = useState(true);
+  const [otpValue, setOtpValue] = useState("");
   const [userStats, setUserStats] = useState({});
   const [totalInvest, setTotalInvest] = useState(0);
   const [mainBtn, setMainBtn] = useState(true);
 
-  const [withdrawValue, setWithdrawValue] = useState('')
-  const [withdrawAddress, setWithdrawAddress] = useState('')
-  const [showAddressError, setShowAddressError] = useState(false)
-  const [showAmountError, setShowAmountError] = useState(false)
-
- 
+  const [withdrawValue, setWithdrawValue] = useState("");
+  const [withdrawAddress, setWithdrawAddress] = useState("");
+  const [showAddressError, setShowAddressError] = useState(false);
+  const [showAmountError, setShowAmountError] = useState(false);
 
   useEffect(() => {
-    
     getWalletAddress(user_id).then((res) => {
       setWalletAddress(res?.wallets);
     });
@@ -69,27 +67,24 @@ export const Dashboard = () => {
       setCopiedDCBT(true);
     }
   };
-  const handleSelect=(e)=>{
+  const handleSelect = (e) => {
     console.log(e);
-    if(e === 'roiIncome'){
-      setWithdrawValue(userStats?.roi_income)
+    if (e === "roiIncome") {
+      setWithdrawValue(userStats?.roi_income);
     }
-    if(e === 'referralIncome'){
-      setWithdrawValue(userStats?.referral_income)
+    if (e === "referralIncome") {
+      setWithdrawValue(userStats?.referral_income);
     }
-    
-  }
-  const handleWithdraw = ()=>{
-    if(withdrawAddress === ''){
-      setShowAddressError(true)
+  };
+  const handleWithdraw = () => {
+    if (withdrawAddress === "") {
+      setShowAddressError(true);
     }
-    if(withdrawValue===''){
-      setShowAmountError(true)
+    if (withdrawValue === "") {
+      setShowAmountError(true);
     }
-    console.log(withdrawAddress,"withdrawAddress");
-  }
-
-
+    console.log(withdrawAddress, "withdrawAddress");
+  };
 
   return (
     <>
@@ -352,39 +347,37 @@ export const Dashboard = () => {
 
                     <form className="mt-2">
                       <div className="mb-3">
-                      <div className="d-flex justify-content-between">
-                        <label
-                          for="exampleInputEmail1"
-                          className="form-label form-lalbe-text"
-                        >
-                          Wallet Address
-                        </label>
-                        <label
-                          for="exampleInputEmail1"
-                          className="form-label form-lalbe-text"
-                        >
-                          <Dropdown
-                          onSelect={handleSelect}
+                        <div className="d-flex justify-content-between">
+                          <label
+                            for="exampleInputEmail1"
+                            className="form-label form-lalbe-text"
                           >
-                            <Dropdown.Toggle
-                              variant="Secondary"
-                              id="dropdown-basic" 
-                              size="sm"
-                            >
-                              Income Type
-                            </Dropdown.Toggle>
+                            Wallet Address
+                          </label>
+                          <label
+                            for="exampleInputEmail1"
+                            className="form-label form-lalbe-text"
+                          >
+                            <Dropdown onSelect={handleSelect}>
+                              <Dropdown.Toggle
+                                variant="Secondary"
+                                id="dropdown-basic"
+                                size="sm"
+                              >
+                                Income Type
+                              </Dropdown.Toggle>
 
-                            <Dropdown.Menu>
-                              <Dropdown.Item eventKey={"roiIncome"}>
-                                ROI
-                              </Dropdown.Item>
-                              <Dropdown.Item eventKey={"referralIncome"}>
-                                Referral
-                              </Dropdown.Item>
-                            </Dropdown.Menu>
-                          </Dropdown>
-                        </label>
-                      </div>
+                              <Dropdown.Menu>
+                                <Dropdown.Item eventKey={"roiIncome"}>
+                                  ROI
+                                </Dropdown.Item>
+                                <Dropdown.Item eventKey={"referralIncome"}>
+                                  Referral
+                                </Dropdown.Item>
+                              </Dropdown.Menu>
+                            </Dropdown>
+                          </label>
+                        </div>
                         <input
                           type="text"
                           className="form-control"
@@ -400,14 +393,14 @@ export const Dashboard = () => {
                           Amount
                         </label>
                         <input
-                        type="text"
-                        className="form-control"
-                        id="exampleInputPassword1"
-                        value={withdrawValue}
-                        onChange={(e)=>{
-                          setWithdrawValue(e.target.value)
-                        }}
-                      />
+                          type="text"
+                          className="form-control"
+                          id="exampleInputPassword1"
+                          value={withdrawValue}
+                          onChange={(e) => {
+                            setWithdrawValue(e.target.value);
+                          }}
+                        />
                       </div>
                       <div className="mb-3">
                         <div className="text-center">
@@ -430,30 +423,6 @@ export const Dashboard = () => {
                         </button>
                       </div>
                     </form>
-
-                    {/* <form className="mt-3">
-                  <div className="mb-3">
-                    <label
-                      for="exampleInputEmail1"
-                      className="form-label form-lalbe-text ms-5"
-                    >
-                      Enter OTP
-                    </label>
-                    <span className="justify-content-center d-flex">
-                    <OtpInput
-                   
-                   value={}
-                   onChange={this.handleChange}
-                   inputStyle="otp-input"
-                   placeholder={0}
-                   numInputs={6}
-                   separator={<span>{""}</span>}
-                 />
-                    </span>
-                    
-  
-                  </div>
-                </form> */}
                   </div>
                   <div className="mt-4 ">
                     {walletAddress && walletAddress?.length > 0 ? (
@@ -616,15 +585,17 @@ export const Dashboard = () => {
             ) : (
               <div className="col-md-4 mt-3">
                 <div className="ai-banner">
-                  <div className="d-flex justify-content-start align-items-center">
+                  {/* <div className="d-flex justify-content-start align-items-center">
                     <div>
                       <img src="assets/img/icon1.png" alt="img" width="25px" />{" "}
                       Withdraw
                     </div>
-                    <div className="ms-2"><WalletAddressAlert/></div>
-                    {/* <div><RxCross2/> Clear data</div> */}
-                  </div>
-
+                    <div className="ms-2">
+                      <WalletAddressAlert />
+                    </div>
+                    <div><RxCross2/> Clear data</div>
+                  </div> */}
+                {/* Withdraw form */}
                   <form className="mt-2">
                     <div className="mb-3">
                       <div className="d-flex justify-content-between">
@@ -714,31 +685,44 @@ export const Dashboard = () => {
                         Withdraw Amount
                       </button>
                     </div>
-                  </form>
-
+                  </form> 
+                        {/* otp form */}
                   {/* <form className="mt-3">
-              <div className="mb-3">
-                <label
-                  for="exampleInputEmail1"
-                  className="form-label form-lalbe-text ms-5"
-                >
-                  Enter OTP
-                </label>
-                <span className="justify-content-center d-flex">
-                <OtpInput
-               
-               value={}
-               onChange={this.handleChange}
-               inputStyle="otp-input"
-               placeholder={0}
-               numInputs={6}
-               separator={<span>{""}</span>}
-             />
-                </span>
-                
+                    <div className="mb-3">
+                      <label
+                        for="exampleInputEmail1"
+                        className="form-label form-lalbe-text ms-5"
+                      >
+                        Enter OTP
+                      </label>
+                      <span className="justify-content-center d-flex">
+                        <OtpInput
+                          value={otpValue}
+                          onChange={(e) => {
+                            setOtpValue(e?.replace(/[^0-9.]/, "").replace(/(\..?)\../g, "$1"));
+                          }}
+                          inputStyle="otp-input"
+                          focusStyle="otp-text"
+                          placeholder={0}
+                          numInputs={6}
+                          separator={<span>{""}</span>}
+                        />
+                      </span>
+                    </div>
+                    <div className="d-grid gap-2 mt-5">
+                      <button
+                        className="btn"
+                        type="button"
+                        style={{ background: "#394CF4", color: "white" }}
+                        
+                      >
+                        Confirm OTP
+                      </button>
+                    </div>
+                  </form> */}
 
-              </div>
-            </form> */}
+                  {/* <TransactionSuccessful/> */}
+                  {/* <TransactionCancled/> */}
                 </div>
                 <div className="mt-3">
                   {walletAddress && walletAddress?.length > 0 ? (

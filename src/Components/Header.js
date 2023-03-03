@@ -61,13 +61,18 @@ export const Header = () => {
                     </Link>
                   </li>
                   <li className="nav-item px-5">
-                    <Link className="nav-link" to="/withdrawHistory">
-                      Withdraw Histroy
+                    <Link className="nav-link" to="/roiHistory">
+                      ROI History
                     </Link>
                   </li>
                   <li className="nav-item px-5">
                     <Link className="nav-link" to="/referralIncome">
                       Referral Income
+                    </Link>
+                  </li>
+                  <li className="nav-item px-5">
+                    <Link className="nav-link" to="/withdrawHistory">
+                      Withdraw Histroy
                     </Link>
                   </li>
                 </>

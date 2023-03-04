@@ -426,6 +426,12 @@ a {
   border-radius: 5px;
   padding: 3px;
 }
+.color-r {
+  color: #ff4929;
+  background-color: #3d923626;
+  border-radius: 5px;
+  padding: 3px;
+}
 .color-o {
   color: #e56e00;
   background-color: #e56e0033;

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TradingViewWidget from "react-tradingview-widget";
 import Dropdown from "react-bootstrap/Dropdown";
+import { toast } from "react-toastify";
 
 import { Footer } from "../Components/Footer";
 import { Header } from "../Components/Header";
@@ -16,11 +17,14 @@ import { RxCross2 } from "react-icons/rx";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import OtpInput from "react-otp-input";
 import { roundTo } from "round-to";
+
 import {
   createWallet,
   getWalletAddress,
   updateWallet,
   checkUserStatus,
+  withdraw,
+  verifyWithdrawOtp
 } from "../utils/apiFunction";
 import { BASE_URL_1, BASE_URL_2 } from "../utils/config";
 
@@ -30,16 +34,24 @@ export const Dashboard = () => {
   const [copiedUSDT, setCopiedUSDT] = useState(false);
   const [copiedDCBT, setCopiedDCBT] = useState(false);
   const [copiedRef, setCopiedRef] = useState(false);
-  const [showOtp, setShowOtp] = useState(true);
+
   const [otpValue, setOtpValue] = useState("");
   const [userStats, setUserStats] = useState({});
   const [totalInvest, setTotalInvest] = useState(0);
   const [mainBtn, setMainBtn] = useState(true);
+  const [trnsactionID, setTransactionID] = useState('')
 
+  const [withdrawType, setWithDrawType] = useState('Income Type')
   const [withdrawValue, setWithdrawValue] = useState("");
   const [withdrawAddress, setWithdrawAddress] = useState("");
   const [showAddressError, setShowAddressError] = useState(false);
   const [showAmountError, setShowAmountError] = useState(false);
+  const [showIncomeTypeError, setShowIncomeTypeError] = useState(false)
+  const [showotpError, setShowOtpError] = useState(false)
+
+  const [showOtp, setShowOtp] = useState(false);
+  const [showWithdrawForm, setshowWithdrawForm] = useState(true)
+  const [showTransactionSuccessful, setShowTransactionSuccesful] = useState(false)
 
   useEffect(() => {
     getWalletAddress(user_id).then((res) => {
@@ -70,12 +82,15 @@ export const Dashboard = () => {
     }
   };
   const handleSelect = (e) => {
-    console.log(e);
-    if (e === "roiIncome") {
+    if (e === "roi") {
+      setWithDrawType(e)
       setWithdrawValue(userStats?.roi_income);
+      setShowIncomeTypeError(false)
     }
-    if (e === "referralIncome") {
+    if (e === "reffral") {
+      setWithDrawType(e)
       setWithdrawValue(userStats?.referral_income);
+      setShowIncomeTypeError(false)
     }
   };
   const handleWithdraw = () => {
@@ -85,8 +100,41 @@ export const Dashboard = () => {
     if (withdrawValue === "") {
       setShowAmountError(true);
     }
-    console.log(withdrawAddress, "withdrawAddress");
+    if(withdrawType === '' || withdrawType ==='Income Type'){
+      setShowIncomeTypeError(true)
+    }
+    if(withdrawAddress && withdrawValue && withdrawType !== 'Income Type'){
+      console.log(user_id,withdrawType,withdrawAddress,withdrawValue);
+      withdraw(user_id,withdrawType,withdrawAddress,withdrawValue).then((res)=>{
+        console.log(res,"withdrwa response");
+        toast.info(res?.message)
+        if(res?.message === 'OTP Send Successfully!'){
+          setShowOtp(true)
+          setTransactionID(res?.params?.transection_id)
+          setshowWithdrawForm(false)
+        }
+      })
+    }
   };
+
+  const verifyWithdrawOTP = ()=>{
+    try {
+      if(otpValue.length >=6){
+        verifyWithdrawOtp(user_id, otpValue,trnsactionID).then((res)=>{
+          console.log(res, "verifyotpwith ersponse");
+          console.log(res?.message);
+          if(res?.message === 'USDT WITHDRAWAL in Progress!'){
+            setShowTransactionSuccesful(true)
+            setShowOtp(false)
+          }
+        })
+      }else{
+        setShowOtpError(true)
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <>
@@ -588,18 +636,14 @@ export const Dashboard = () => {
             ) : (
               <div className="col-md-4 mt-3">
                 <div className="ai-banner">
-                  {/* <div className="d-flex justify-content-start align-items-center">
+                  <div className="d-flex justify-content-start align-items-center">
                     <div>
                       <img src="assets/img/icon1.png" alt="img" width="25px" />{" "}
                       Withdraw
                     </div>
-                    <div className="ms-2">
-                      <WalletAddressAlert />
-                    </div>
-                    <div><RxCross2/> Clear data</div>
-                  </div> */}
+                  </div>
                 {/* Withdraw form */}
-                  <form className="mt-2">
+                {showWithdrawForm ? <form className="mt-2">
                     <div className="mb-3">
                       <div className="d-flex justify-content-between">
                         <label
@@ -620,14 +664,14 @@ export const Dashboard = () => {
                               id="dropdown-basic" 
                               size="sm"
                             >
-                              Income Type
+                              {withdrawType === 'roi' ? "ROI" : withdrawType === 'reffral' ? "Referral" : "Income Type"}
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                              <Dropdown.Item eventKey={"roiIncome"}>
+                              <Dropdown.Item eventKey={"roi"}>
                                 ROI
                               </Dropdown.Item>
-                              <Dropdown.Item eventKey={"referralIncome"}>
+                              <Dropdown.Item eventKey={"reffral"}>
                                 Referral
                               </Dropdown.Item>
                             </Dropdown.Menu>
@@ -641,6 +685,9 @@ export const Dashboard = () => {
                         aria-describedby="emailHelp"
                         value={withdrawAddress}
                         onChange={(e)=>{
+                          if(e.target.value != ''){
+                            setShowAddressError(false)
+                          }
                           setWithdrawAddress(e.target.value)
                         }}
                       />
@@ -659,6 +706,9 @@ export const Dashboard = () => {
                         id="exampleInputPassword1"
                         value={withdrawValue}
                         onChange={(e)=>{
+                          if(e.target.value != ''){
+                            setShowAmountError(false)
+                          }
                           setWithdrawValue(e.target.value)
                         }}
                       />
@@ -676,6 +726,8 @@ export const Dashboard = () => {
                         {""} $1
                       </div>
                     </div>
+                    {showIncomeTypeError ? <p className="error-msg text-center fs-6">select income type</p> : null}
+                        
                     <div className="d-grid gap-2 mt-5">
                       <button
                         className="btn"
@@ -688,43 +740,48 @@ export const Dashboard = () => {
                         Withdraw Amount
                       </button>
                     </div>
-                  </form> 
+                  </form> :null}
+                  
                         {/* otp form */}
-                  {/* <form className="mt-3">
-                    <div className="mb-3">
-                      <label
-                        for="exampleInputEmail1"
-                        className="form-label form-lalbe-text ms-5"
-                      >
-                        Enter OTP
-                      </label>
-                      <span className="justify-content-center d-flex">
-                        <OtpInput
-                          value={otpValue}
-                          onChange={(e) => {
-                            setOtpValue(e?.replace(/[^0-9.]/, "").replace(/(\..?)\../g, "$1"));
-                          }}
-                          inputStyle="otp-input"
-                          focusStyle="otp-text"
-                          placeholder={0}
-                          numInputs={6}
-                          separator={<span>{""}</span>}
-                        />
-                      </span>
-                    </div>
-                    <div className="d-grid gap-2 mt-5">
-                      <button
-                        className="btn"
-                        type="button"
-                        style={{ background: "#394CF4", color: "white" }}
-                        
-                      >
-                        Confirm OTP
-                      </button>
-                    </div>
-                  </form> */}
-
-                  {/* <TransactionSuccessful/> */}
+                        {
+                          showOtp ?  <form className="mt-3">
+                          <div className="mb-3">
+                            <label
+                              for="exampleInputEmail1"
+                              className="form-label form-lalbe-text ms-5"
+                            >
+                              Enter OTP
+                            </label>
+                            <span className="justify-content-center d-flex">
+                              <OtpInput
+                                value={otpValue}
+                                onChange={(e) => {
+                                  setOtpValue(e?.replace(/[^0-9.]/, "").replace(/(\..?)\../g, "$1"));
+                                }}
+                                inputStyle="otp-input"
+                                focusStyle="otp-text"
+                                placeholder={0}
+                                numInputs={6}
+                                separator={<span>{""}</span>}
+                              />
+                            </span>
+                          </div>
+                          {showotpError ? <p className="error-msg text-center">Enter Valid OTP</p> : null}
+                          <div className="d-grid gap-2 mt-5">
+                            <button
+                              className="btn"
+                              type="button"
+                              style={{ background: "#394CF4", color: "white" }}
+                              onClick={()=> verifyWithdrawOTP()}
+                            >
+                              Confirm OTP
+                            </button>
+                          </div>
+                           
+                        </form> :null
+                        }
+                 {showTransactionSuccessful ? <TransactionSuccessful address={withdrawAddress} amount={withdrawValue} date={Date.now()}/> : null}
+                  
                   {/* <TransactionCancled/> */}
                 </div>
                 <div className="mt-3">

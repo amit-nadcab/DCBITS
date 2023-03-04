@@ -120,9 +120,18 @@ export const botTradeHistory = async(user_id)=>{
     console.log(error);
   }
 }
-export const withdraw = async(user_id, type, to, address, volume, remark)=>{
+export const withdraw = async(user_id, type,toAddress, volume)=>{
   try {
-    const data = await axios.post(`${BASE_URL}/get-withdraw`,{user_id, type, to, address,volume, remark})
+    console.log(user_id,toAddress,type,volume)
+    const data = await axios.post(`${BASE_URL}/get-withdraw`,{user_id, type,toAddress,volume})
+    return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+export const verifyWithdrawOtp = async(user_id,otp,transection_id)=>{
+  try {
+    const data = await axios.post(`${BASE_URL}/varify/email-Withdraw`,{user_id, otp, transection_id})
     return data.data
   } catch (error) {
     console.log(error);

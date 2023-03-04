@@ -82,6 +82,7 @@ export const Dashboard = () => {
     }
   };
   const handleSelect = (e) => {
+
     if (e === "roi") {
       setWithDrawType(e)
       setWithdrawValue(userStats?.roi_income);
@@ -94,6 +95,7 @@ export const Dashboard = () => {
     }
   };
   const handleWithdraw = () => {
+    console.log(withdrawValue,'withdrawValue');
     if (withdrawAddress === "") {
       setShowAddressError(true);
     }
@@ -103,7 +105,7 @@ export const Dashboard = () => {
     if(withdrawType === '' || withdrawType ==='Income Type'){
       setShowIncomeTypeError(true)
     }
-    if(withdrawAddress && withdrawValue && withdrawType !== 'Income Type'){
+    if(withdrawAddress && withdrawValue>=0 && withdrawType !== 'Income Type'){
       console.log(user_id,withdrawType,withdrawAddress,withdrawValue);
       withdraw(user_id,withdrawType,withdrawAddress,withdrawValue).then((res)=>{
         console.log(res,"withdrwa response");
@@ -116,6 +118,8 @@ export const Dashboard = () => {
       })
     }
   };
+
+  
 
   const verifyWithdrawOTP = ()=>{
     try {

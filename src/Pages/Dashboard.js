@@ -395,85 +395,146 @@ export const Dashboard = () => {
                       <div>{/* <RxCross2/> Clear data */}</div>
                     </div>
 
-                    {/* <form className="mt-2">
-                      <div className="mb-3">
-                        <div className="d-flex justify-content-between">
-                          <label
-                            for="exampleInputEmail1"
-                            className="form-label form-lalbe-text"
+                    {/* Withdraw form */}
+                {showWithdrawForm ? <form className="mt-2">
+                    <div className="mb-3">
+                      <div className="d-flex justify-content-between">
+                        <label
+                          for="exampleInputEmail1"
+                          className="form-label form-lalbe-text"
+                        >
+                          Wallet Address
+                        </label>
+                        <label
+                          for="exampleInputEmail1"
+                          className="form-label form-lalbe-text"
+                        >
+                          <Dropdown
+                          onSelect={handleSelect}
                           >
-                            Wallet Address
-                          </label>
-                          <label
-                            for="exampleInputEmail1"
-                            className="form-label form-lalbe-text"
-                          >
-                            <Dropdown onSelect={handleSelect}>
-                              <Dropdown.Toggle
-                                variant="Secondary"
-                                id="dropdown-basic"
-                                size="sm"
-                              >
-                                Income Type
-                              </Dropdown.Toggle>
+                            <Dropdown.Toggle
+                              variant="Secondary"
+                              id="dropdown-basic" 
+                              size="sm"
+                            >
+                              {withdrawType === 'roi' ? "ROI" : withdrawType === 'reffral' ? "Referral" : "Income Type"}
+                            </Dropdown.Toggle>
 
-                              <Dropdown.Menu>
-                                <Dropdown.Item eventKey={"roiIncome"}>
-                                  ROI
-                                </Dropdown.Item>
-                                <Dropdown.Item eventKey={"referralIncome"}>
-                                  Referral
-                                </Dropdown.Item>
-                              </Dropdown.Menu>
-                            </Dropdown>
-                          </label>
-                        </div>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="exampleInputEmail1"
-                          aria-describedby="emailHelp"
-                        />
+                            <Dropdown.Menu>
+                              <Dropdown.Item eventKey={"roi"}>
+                                ROI
+                              </Dropdown.Item>
+                              <Dropdown.Item eventKey={"reffral"}>
+                                Referral
+                              </Dropdown.Item>
+                            </Dropdown.Menu>
+                          </Dropdown>
+                        </label>
                       </div>
-                      <div className="mb-3">
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        aria-describedby="emailHelp"
+                        value={withdrawAddress}
+                        onChange={(e)=>{
+                          if(e.target.value != ''){
+                            setShowAddressError(false)
+                          }
+                          setWithdrawAddress(e.target.value)
+                        }}
+                      />
+                     {showAddressError ? <p className="error-msg">Enter Address</p> : null} 
+                    </div>
+                    <div className="mb-3">
+                      <label
+                        for="exampleInputPassword1"
+                        className="form-label form-lalbe-text"
+                      >
+                        Amount
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="exampleInputPassword1"
+                        value={withdrawValue}
+                        onChange={(e)=>{
+                          if(e.target.value != ''){
+                            setShowAmountError(false)
+                          }
+                          setWithdrawValue(e.target.value)
+                        }}
+                      />
+                      {showAmountError ? <p className="error-msg">Enter Amount</p> : null}
+                      
+                    </div>
+                    <div className="mb-3">
+                      <div className="text-center">
                         <label
                           for="exampleInputPassword1"
                           className="form-label form-lalbe-text"
                         >
-                          Amount
+                          Fees:
                         </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="exampleInputPassword1"
-                          value={withdrawValue}
-                          onChange={(e) => {
-                            setWithdrawValue(e.target.value);
-                          }}
-                        />
+                        {""} $1
                       </div>
-                      <div className="mb-3">
-                        <div className="text-center">
-                          <label
-                            for="exampleInputPassword1"
-                            className="form-label form-lalbe-text"
-                          >
-                            Fees:
-                          </label>
-                          {""} $1
-                        </div>
-                      </div>
-                      <div className="d-grid gap-2 mt-5">
-                        <button
-                          className="btn"
-                          type="button"
-                          style={{ background: "#394CF4", color: "white" }}
-                        >
-                          Withdraw Amount
-                        </button>
-                      </div>
-                    </form> */}
-                    <TransactionSuccessful/>
+                    </div>
+                    {showIncomeTypeError ? <p className="error-msg text-center fs-6">select income type</p> : null}
+                        
+                    <div className="d-grid gap-2 mt-5">
+                      <button
+                        className="btn"
+                        type="button"
+                        style={{ background: "#394CF4", color: "white" }}
+                        onClick={()=>{
+                          handleWithdraw()
+                        }}
+                      >
+                        Withdraw Amount
+                      </button>
+                    </div>
+                  </form> :null}
+                  
+                        {/* otp form */}
+                        {
+                          showOtp ?  <form className="mt-3">
+                          <div className="mb-3">
+                            <label
+                              for="exampleInputEmail1"
+                              className="form-label form-lalbe-text ms-5"
+                            >
+                              Enter OTP
+                            </label>
+                            <span className="justify-content-center d-flex">
+                              <OtpInput
+                                value={otpValue}
+                                onChange={(e) => {
+                                  setOtpValue(e?.replace(/[^0-9.]/, "").replace(/(\..?)\../g, "$1"));
+                                }}
+                                inputStyle="otp-input"
+                                focusStyle="otp-text"
+                                placeholder={0}
+                                numInputs={6}
+                                separator={<span>{""}</span>}
+                              />
+                            </span>
+                          </div>
+                          {showotpError ? <p className="error-msg text-center">Enter Valid OTP</p> : null}
+                          <div className="d-grid gap-2 mt-5">
+                            <button
+                              className="btn"
+                              type="button"
+                              style={{ background: "#394CF4", color: "white" }}
+                              onClick={()=> verifyWithdrawOTP()}
+                            >
+                              Confirm OTP
+                            </button>
+                          </div>
+                           
+                        </form> :null
+                        }
+                        {/* Transaction success */}
+                 {showTransactionSuccessful ? <TransactionSuccessful address={withdrawAddress} amount={withdrawValue} date={Date.now()}/> : null}
                   </div>
                   <div className="mt-4 ">
                     {walletAddress && walletAddress?.length > 0 ? (
@@ -780,9 +841,8 @@ export const Dashboard = () => {
                            
                         </form> :null
                         }
+                        {/* Transaction success */}
                  {showTransactionSuccessful ? <TransactionSuccessful address={withdrawAddress} amount={withdrawValue} date={Date.now()}/> : null}
-                  
-                  {/* <TransactionCancled/> */}
                 </div>
                 <div className="mt-3">
                   {walletAddress && walletAddress?.length > 0 ? (
@@ -791,20 +851,21 @@ export const Dashboard = () => {
                       style={{ borderRadius: "12px" }}
                     >
                       <div className="card-body wallet-card">
-                        <div className="d-block-wallet-data align-items-center justify-content-between border-bottom">
-                          <div>
+                        <div className="row">
+                          <div className="col-lg-4">
                             {" "}
                             <img
                               src="assets/img/wallet.png"
                               alt="img"
                               width="20px"
                             />
-                            <span>
+                            <span className="fs-15">
                               {" "}
                               {walletAddress[0]?.wallet_type} Wallet Address
                             </span>
                           </div>
-                          <div className="d-flex align-items-center px-5 wallet-address">
+                          <div className="col-lg-8 wallet-address">
+                          <div className="d-flex">
                             <div>
                               {" "}
                               <p className="address-text position-realative">
@@ -813,6 +874,7 @@ export const Dashboard = () => {
                                   walletAddress[0]?.wallet_address.slice(25)}
                               </p>
                             </div>
+                            
                             <div className="">
                               <CopyToClipboard
                                 className="mx-1"
@@ -837,30 +899,32 @@ export const Dashboard = () => {
                                 </span>
                               ) : null}
                             </div>
+                            </div>
                           </div>
                         </div>
-                        <div className="d-block-wallet-data align-items-center justify-content-between">
-                          <div>
+                        <div className="row">
+                          <div className="col-lg-4">
                             {" "}
                             <img
                               src="assets/img/wallet.png"
                               alt="img"
                               width="20px"
                             />{" "}
-                            <span>
+                            <span className="fs-15">
                               {" "}
                               {walletAddress[1]?.wallet_type} Wallet Address
                             </span>
                           </div>
-                          <div className="d-flex align-items-center px-5 wallet-address">
-                            <div>
-                              <p className="address-text position-realative">
-                                {walletAddress[1]?.wallet_address.slice(0, 10) +
-                                  "..." +
-                                  walletAddress[1]?.wallet_address.slice(25)}
-                              </p>
-                            </div>
-                            <div>
+                          <div className="col-lg-8 wallet-address">
+                            <div className="d-flex">
+                              <div> 
+                                <p className="address-text position-realative">
+                                  {walletAddress[1]?.wallet_address.slice(0, 10) +
+                                    "..." +
+                                    walletAddress[1]?.wallet_address.slice(25)}
+                                </p>
+                              </div>
+                              <div>
                               <CopyToClipboard
                                 className="mx-1"
                                 text={walletAddress[1]?.wallet_address}
@@ -884,6 +948,8 @@ export const Dashboard = () => {
                                 </span>
                               ) : null}
                             </div>
+                            </div>
+                            
                           </div>
                         </div>
                       </div>

@@ -4,6 +4,10 @@ import { Footer } from "../Components/Footer";
 import { Header } from "../Components/Header";
 import { getRoiHistory } from "../utils/apiFunction";
 
+import ReactPaginate from "react-paginate";
+
+
+
 export const RoiHistory = () => {
   const { user_id } = useSelector((state) => state.data.value);
   const [tab, setTab] = useState([]);
@@ -63,11 +67,25 @@ export const RoiHistory = () => {
                 ) : (
                   <p> No data found</p>
                 )}
+                
               </tbody>
+              
             </table>
+            {/* <div className="">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="next >"
+                // onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={3}
+                previousLabel="< previous"
+                renderOnZeroPageCount={null}
+              />
+              </div> */}
           </div>
         </div>
       </div>
+     
       <Footer />
     </>
   );

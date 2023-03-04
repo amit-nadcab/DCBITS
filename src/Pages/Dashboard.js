@@ -8,7 +8,9 @@ import { Header } from "../Components/Header";
 import { WalletAddressAlert } from "../Components/walletAddressAlert";
 import { TransactionSuccessful } from "../Components/TransactionSuccessful";
 import { TransactionCancled } from "../Components/TransactionCancled";
-import { Sidebar } from "../Components/Sidebar";
+import { BoatTable } from "../Components/BoatTable";
+
+// import { Sidebar } from "../Components/Sidebar";
 import { AiFillCopy } from "react-icons/ai";
 import { RxCross2 } from "react-icons/rx";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -345,7 +347,7 @@ export const Dashboard = () => {
                       <div>{/* <RxCross2/> Clear data */}</div>
                     </div>
 
-                    <form className="mt-2">
+                    {/* <form className="mt-2">
                       <div className="mb-3">
                         <div className="d-flex justify-content-between">
                           <label
@@ -422,7 +424,8 @@ export const Dashboard = () => {
                           Withdraw Amount
                         </button>
                       </div>
-                    </form>
+                    </form> */}
+                    <TransactionSuccessful/>
                   </div>
                   <div className="mt-4 ">
                     {walletAddress && walletAddress?.length > 0 ? (
@@ -887,6 +890,7 @@ export const Dashboard = () => {
                 ) : null}
               </div>
             )}
+            <BoatTable/>
           </div>
         </div>
       </div>

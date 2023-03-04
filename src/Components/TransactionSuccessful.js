@@ -8,7 +8,7 @@ export const TransactionSuccessful = () => {
         <div className="d-flex  justify-content-center align-items-center">
           <div>
             <img src="assets/img/greenTick.png" alt="img" width="25px" />{" "}
-            Transaction Completed Successfully
+            <span className="transaction-status-text">Transaction Completed Successfully</span> 
           </div>
         </div>
         <div className="transaction-success">

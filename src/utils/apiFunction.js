@@ -112,5 +112,21 @@ export const getRoiHistory = async(user_id)=>{
     console.log(error);
   }
 }
+export const botTradeHistory = async(user_id)=>{
+  try {
+    const data = await axios.post(`${BASE_URL}/trade-bot-history`,{user_id})
+    return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
+export const withdraw = async(user_id, type, to, address, volume, remark)=>{
+  try {
+    const data = await axios.post(`${BASE_URL}/get-withdraw`,{user_id, type, to, address,volume, remark})
+    return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 

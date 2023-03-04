@@ -6,22 +6,19 @@
     padding: 25px 25px 25px 25px;
     border-radius: 12px;
 }
-
 .transaction-success-value{
     color: black;
     font-weight: 500;
-   
-    
 }
-
 .transaction-data{
     display: flex;
     border-bottom: 1px solid #EEEEEE;
     padding: 10px 0px;
-   
 }
-
 .transaction-data:last-child{
     border-bottom: none
+}
+.transaction-status-text{
+    font-size: 1rem;
 }
 

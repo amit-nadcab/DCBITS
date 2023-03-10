@@ -108,28 +108,31 @@ export const Dashboard = () => {
     if(withdrawAddress && withdrawValue>=0 && withdrawType !== 'Income Type'){
       console.log(user_id,withdrawType,withdrawAddress,withdrawValue);
       withdraw(user_id,withdrawType,withdrawAddress,withdrawValue).then((res)=>{
-        console.log(res,"withdrwa response");
+        // console.log(res,"withdrwa response");
         toast.info(res?.message)
         if(res?.message === 'OTP Send Successfully!'){
           setShowOtp(true)
           setTransactionID(res?.params?.transection_id)
           setshowWithdrawForm(false)
         }
+       
       })
     }
   };
-
-  
 
   const verifyWithdrawOTP = ()=>{
     try {
       if(otpValue.length >=6){
         verifyWithdrawOtp(user_id, otpValue,trnsactionID).then((res)=>{
-          console.log(res, "verifyotpwith ersponse");
-          console.log(res?.message);
+          // console.log(res, "verifyotpwith ersponse");
+          // console.log(res?.message);
           if(res?.message === 'USDT WITHDRAWAL in Progress!'){
             setShowTransactionSuccesful(true)
             setShowOtp(false)
+          }
+          if(res?.message === 'Invalid OTP'){
+            toast.info(res?.message)
+            setOtpValue('')
           }
         })
       }else{
@@ -142,8 +145,6 @@ export const Dashboard = () => {
 
   return (
     <>
-      {/* <Navbar /> */}
-      {/* <Sidebar /> */}
       <Header />
 
       <div className="page-wrapper pt-5">

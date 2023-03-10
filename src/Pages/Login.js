@@ -27,7 +27,7 @@ export const Login = () => {
     setFormdata({ ...formData, ...data });
   };
 
- 
+
   return (
     <>
       <Navbar />
@@ -67,7 +67,7 @@ export const Login = () => {
                   ) : null}
                  
                 </div>
-                <div className="input">
+                <div className="input mb-1">
                   <i className="">
                     <RiLockPasswordFill />
                   </i>
@@ -89,6 +89,8 @@ export const Login = () => {
                       }
                     }}
                   />
+                 
+                  
                   {passwordError ? (
                     <p className="text-danger text-start">Enter Password</p>
                   ) : null}
@@ -104,9 +106,9 @@ export const Login = () => {
                     }}
                   />
                   }
-                   
+                  
                 </div>
-                
+                <div><p className="text-end text-primary" onClick={()=> navigate('/forgetPassword')}>Forget Password ?</p></div>
                 <input
                   className="signup-btn btn btn-primary"
                   type="button"

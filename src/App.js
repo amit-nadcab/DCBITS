@@ -11,6 +11,7 @@ import { InvestHistory } from "./Pages/InvestHistory";
 import { WithdrawHistory } from "./Pages/WithdrawHistory";
 import {ReferralIncome} from './Pages/ReferralIncome'
 import {RoiHistory} from './Pages/RoiHistory'
+import { ForgetPassword } from "./Pages/ForgetPassword";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -31,6 +32,7 @@ function App() {
         <Route path="/roiHistory" element={isLoggedIn ?  <RoiHistory />: <Navigate to='/home' /> } />
         <Route path="/referralIncome" element={isLoggedIn ?  <ReferralIncome />: <Navigate to='/home' /> } />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
+        <Route path="/forgetPassword" element={<ForgetPassword />} />
         <Route path="/signup" element={isLoggedIn ? <Navigate to='/home' /> : <Signup />} />
         <Route path="/login" element={isLoggedIn ? <Navigate to='/home' /> : <Login />} />
         

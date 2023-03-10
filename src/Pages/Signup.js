@@ -152,14 +152,16 @@ export const Signup = () => {
                       </p>
                     </>
                   ) : null}
-
+                      
                   <BiHide
                     className="position-absolute show-hide"
                     onClick={() => {
                       dispatch({ type: "HANDLE_SHOW_P" });
                     }}
                   />
+                  
                 </div>
+                <p className="mb-3">Password should be between 8 to 16 characters<br/>and consist of number and special symbols</p>
                 <div className="input">
                   <i className="">
                     <RiLockPasswordFill />
@@ -243,6 +245,7 @@ export const Signup = () => {
                           console.log(res, "aaa");
                           console.log(res?.params?.user_id, "response");
                           if (res?.status == "400") {
+                            
                             toast.error(res?.message);
                           }
                           if (res?.params?.user_id) {
@@ -256,6 +259,7 @@ export const Signup = () => {
                           console.log(err, "amit error");
                         });
                     } else {
+                      
                       toast.error("Fill complete form");
                     }
                   }}

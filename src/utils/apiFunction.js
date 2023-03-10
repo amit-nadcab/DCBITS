@@ -137,5 +137,13 @@ export const verifyWithdrawOtp = async(user_id,otp,transection_id)=>{
     console.log(error);
   }
 }
+export const forgetPasswordEmail = async(email)=>{
+  try {
+    const data = await axios.post(`${BASE_URL}/forget-password`,{email})
+    return data.data
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 

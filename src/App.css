@@ -529,6 +529,10 @@ cursor: pointer;
   color: black;
 }
 
+.menu-text{
+  color: #D0D0D0;
+}
+
 
 @media only screen and (max-width: 768px) {
   .card-mob {
@@ -562,6 +566,34 @@ cursor: pointer;
   .card-heading {
     font-size: 20px;
     color: #ffffff;
+  }
+  .offcanvas-mobile{
+    
+    top: -1px ;
+    height: 100% !important;
+  }
+  .offcanvas-head{
+    background: #e1e1e1;
+    height: 105px;
+    padding-top: 0;
+  }
+  .offcanvas-custom-body{
+    border-radius: 22px 22px 0px 0px;
+    top: -25px;
+    position: relative;
+    background: white;
+  }
+  .offcanvas-custom-body ul li{
+    border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    /* box-shadow: inset 0px 1px 3px rgba(0, 0, 0, 0.25); */
+  
+
+  }
+  .offcanvas-custom-body ul+ul li{
+    border-bottom: 0
+  }
+  .footer-items ul li{
+    border-bottom: 0;
   }
 }
 

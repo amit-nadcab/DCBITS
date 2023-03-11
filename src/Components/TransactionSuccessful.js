@@ -28,7 +28,6 @@ export const TransactionSuccessful = ({address, amount, date}) => {
           <div className="col-lg-4 col-md-12"><p>Date</p></div>
             <div className="transaction-success-value col-lg-8 col-md-12"><p className="fw-bold text-dark">{new Date(date).toLocaleDateString()}</p></div>
           </div>
-        
         </div>
       </div>
     </>

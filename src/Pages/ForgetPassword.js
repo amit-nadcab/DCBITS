@@ -3,6 +3,7 @@ import { Footer } from "../Components/Footer";
 import { Navbar } from "../Components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import {verifyForgetPasswordOtp} from '../utils/apiFunction'
 
 import { setIsLoggedIn } from "../redux/reducer";
 import { forgetPasswordEmail } from "../utils/apiFunction";
@@ -83,6 +84,9 @@ export const ForgetPassword = () => {
                       name="otp"
                       onChange={(event) => {
                           setOtp(event.target.value)
+                          if(event.target.value.length >=6){
+                            setOtpError(false)
+                          }
                       }
                   }
                       // onBlur={() => {
@@ -98,6 +102,11 @@ export const ForgetPassword = () => {
                     />
                   </div> : null
                 }
+                {otpError ? (
+                  <div>
+                    <p className="text-danger text-start">Enter Valid OTP</p>
+                  </div>
+                ) : null}
               
                 <input
                   className="signup-btn btn btn-primary"
@@ -123,7 +132,17 @@ export const ForgetPassword = () => {
                           }
                     }
                     if(showOTP){
-
+                      if(otp == ''){
+                        setOtpError(true)
+                      }else{
+                        verifyForgetPasswordOtp(email, otp).then((res)=>{
+                          console.log(res,"response");
+                          if(res?.message === "OTP verified"){
+                              toast.success(res?.message)
+                              navigate('/confirmPassword',{state:{id: res?.user_data?.user_id}})
+                          }
+                        })
+                      }
                     }
                    
                   }}

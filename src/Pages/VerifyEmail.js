@@ -13,7 +13,7 @@ export const VerifyEmail = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const [otp, setOtp] = useState(0)
+  const [otp, setOtp] = useState('')
   const [showOtpError, setShowOtpError] = useState(false)
 
   console.log(location.state.user_id);

@@ -145,5 +145,23 @@ export const forgetPasswordEmail = async(email)=>{
     console.log(error);
   }
 }
+export const verifyForgetPasswordOtp = async(email, otp)=>{
+  try {
+      const data = await axios.post(`${BASE_URL}/verify/forget-password`,{email, otp})
+      return data.data
+  } catch (error) {
+    console.log(error);
+    toast.error(error?.response?.data?.message)
+  }
+}
+export const setNewPassword = async(user_id, password, confirm_password) =>{
+  try {
+    const data = await axios.post(`${BASE_URL}/set-password`,{user_id, password,confirm_password })
+    return data.data
+  } catch (error) {
+    console.log(error);
+    toast.error(error?.response?.data?.message)
+  }
+}
 
 

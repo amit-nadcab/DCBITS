@@ -12,6 +12,7 @@ import { WithdrawHistory } from "./Pages/WithdrawHistory";
 import {ReferralIncome} from './Pages/ReferralIncome'
 import {RoiHistory} from './Pages/RoiHistory'
 import { ForgetPassword } from "./Pages/ForgetPassword";
+import { ConfirmPassword } from "./Pages/ConfirmPassword";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -33,6 +34,7 @@ function App() {
         <Route path="/referralIncome" element={isLoggedIn ?  <ReferralIncome />: <Navigate to='/home' /> } />
         <Route path="/verifyEmail" element={<VerifyEmail />} />
         <Route path="/forgetPassword" element={<ForgetPassword />} />
+        <Route path="/confirmPassword" element={<ConfirmPassword />} />
         <Route path="/signup" element={isLoggedIn ? <Navigate to='/home' /> : <Signup />} />
         <Route path="/login" element={isLoggedIn ? <Navigate to='/home' /> : <Login />} />
         

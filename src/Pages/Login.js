@@ -108,7 +108,7 @@ export const Login = () => {
                   }
                   
                 </div>
-                <div><p className="text-end text-primary" onClick={()=> navigate('/forgetPassword')}>Forget Password ?</p></div>
+                <div><p className="text-end text-primary" onClick={()=> navigate('/forgetPassword')} style={{cursor:"pointer"}}>Forget Password ?</p></div>
                 <input
                   className="signup-btn btn btn-primary"
                   type="button"

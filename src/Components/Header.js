@@ -50,33 +50,34 @@ export const Header = () => {
           </button>
 
           <div
-            class="offcanvas offcanvas-bottom offcanvas-mobile"
+            className="offcanvas offcanvas-bottom offcanvas-mobile"
             tabindex="-1"
             id="offcanvasBottom"
             aria-labelledby="offcanvasBottomLabel"
           >
-            <div class="offcanvas-header offcanvas-head">
-            <Link className="navbar-brand" to="/home">
-            <img
-              src="assets/img/logo_1.png"
-              className="logo"
-              alt="logo"
-              width="172px"
-              height="43px"
-            />
-          </Link>
-              
+            <div className="offcanvas-header offcanvas-head">
+              <Link className="navbar-brand" to="/home">
+                <img
+                  src="assets/img/logo_1.png"
+                  className="logo"
+                  alt="logo"
+                  width="172px"
+                  height="43px"
+                />
+              </Link>
               <button
                 type="button"
                 id="offcanvasBottom"
-                class="btn-close text-reset"
+                className="btn-close text-reset"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
-                onClick={()=>setMenu(true)}
+                onClick={() => setMenu(true)}
               ></button>
             </div>
-            <div class="offcanvas-body small offcanvas-custom-body px-0">
-              <p className="text-center mb-4 menu-text">MENU</p>
+            <div className="offcanvas-body small offcanvas-custom-body px-0">
+              {window.innerWidth < 500 ? (
+                <p className="text-center mb-4 menu-text">MENU</p>
+              ) : null}
               <ul className="navbar-nav m-auto text-center">
                 {isLoggedIn ? (
                   <>
@@ -101,7 +102,10 @@ export const Header = () => {
                       </Link>
                     </li>
                     <li className="nav-item px-3">
-                      <Link className="nav-link text-dark" to="/withdrawHistory">
+                      <Link
+                        className="nav-link text-dark"
+                        to="/withdrawHistory"
+                      >
                         Withdraw Histroy
                       </Link>
                     </li>
@@ -138,7 +142,7 @@ export const Header = () => {
                 )}
               </ul>
 
-              <div className="position-fixed" style={{ bottom: "0", left: 0 , right: 0 }}>
+              <div className="position-fixed" style={{ bottom: "0", left: 0, right: 0 }}>
                 <Footer />
               </div>
             </div>

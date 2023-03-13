@@ -67,7 +67,7 @@ export const Navbar = () => {
               ></button>
             </div>
             <div className="offcanvas-body small offcanvas-custom-body px-0">
-            <ul className="navbar-nav text-center ml-auto">
+            <ul className="navbar-nav text-center ms-auto">
               {isLoggedIn ? (
                 <>
                   <li className="nav-item">

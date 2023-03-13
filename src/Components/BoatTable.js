@@ -23,11 +23,11 @@ export const BoatTable = () => {
             <table className="table table-borderless" style={{ background: "#FFF" }}>
               <thead className="bot-table-thead">
                 <tr className="text-dark" style={{border: "1px solid white",borderRadius: "12px", fontSize: "1rem" }}>
-                  <th scope="col">Trade Pair</th>
-                  <th scope="col">Buy Price</th>
-                  <th scope="col">Sell Price</th>
-                  <th scope="col">Floating Loss</th>
-                  <th scope="col">Profit</th>
+                  <th scope="col" className="td-min-with">Trade Pair</th>
+                  <th scope="col" className="td-min-with">Buy Price</th>
+                  <th scope="col" className="td-min-with">Sell Price</th>
+                  <th scope="col" className="td-min-with">Floating Loss</th>
+                  <th scope="col" className="td-min-with">Profit</th>
                 </tr>
               </thead>
               <tbody className="text-center text-dark">

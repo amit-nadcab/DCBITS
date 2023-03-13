@@ -187,7 +187,7 @@ export const Dashboard = () => {
                         <p className="mobile-stats-key">Total Earning</p>
                         <p className="mobile-stats-key">Total Investment</p>
                         <p className="mobile-stats-key">Total ROI Income</p>
-                        <p className="mobile-stats-key">Total Direct Members</p>
+                        <p className="mobile-stats-key">Direct Members</p>
                         <p className="mobile-stats-key">Total Level Income</p>
                       </div>
                       <div className="col-6">
@@ -230,7 +230,7 @@ export const Dashboard = () => {
                     <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
                       <h6 className="text-white">
                         Invite your friend and get{" "}
-                        <span className="text-warning"> $10</span>
+                        <span className="text-warning"> 10%</span>
                       </h6>
                       <p className="text-white">
                         Effortlessly manage your finance with us
@@ -677,7 +677,7 @@ export const Dashboard = () => {
                         <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
                           <h6 className="text-white">
                             Invite your friend and get{" "}
-                            <span className="text-warning"> $10</span>
+                            <span className="text-warning"> 10%</span>
                           </h6>
                           <p className="text-white">
                             Effortlessly manage your finance with us
@@ -989,7 +989,7 @@ export const Dashboard = () => {
                     <div className="create-wallet-1 d-flex flex-column align-items-start p-2 mt-2">
                       <h6 className="text-white">
                         Invite your friend and get{" "}
-                        <span className="text-warning"> $10</span>
+                        <span className="text-warning"> 10%</span>
                       </h6>
                       <p className="text-white">
                         Effortlessly manage your finance with us

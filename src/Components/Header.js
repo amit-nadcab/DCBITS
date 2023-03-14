@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, NavLink} from "react-router-dom";
 import { AiOutlineUser } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../redux/reducer";
 import { toast } from "react-toastify";
 import { FiMenu } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
+import {RiLogoutBoxRFill} from 'react-icons/ri'
 import { Footer } from "./Footer";
 
 export const Header = () => {
@@ -82,32 +83,43 @@ export const Header = () => {
                 {isLoggedIn ? (
                   <>
                     <li className="nav-item px-3">
-                      <Link className="nav-link text-dark" to="/dashboard">
+                      <NavLink to="/dashboard"
+                       className={({ isActive, isPending }) =>
+                       isPending ? "nav-link text-dark" : isActive ? "nav-link selected-menu" : "nav-link text-dark"
+                     }>
                         Dashboard
-                      </Link>
+                      </NavLink>
                     </li>
                     <li className="nav-item px-3">
-                      <Link className="nav-link text-dark" to="/investHistory">
+                      <NavLink className={({ isActive, isPending }) =>
+                       isPending ? "nav-link text-dark" : isActive ? "nav-link selected-menu" : "nav-link text-dark"
+                     } to="/investHistory">
                         Investment History
-                      </Link>
+                      </NavLink>
                     </li>
                     <li className="nav-item px-3">
-                      <Link className="nav-link text-dark" to="/roiHistory">
+                      <NavLink className={({ isActive, isPending }) =>
+                       isPending ? "nav-link text-dark" : isActive ? "nav-link selected-menu" : "nav-link text-dark"
+                     } to="/roiHistory">
                         ROI History
-                      </Link>
+                      </NavLink>
                     </li>
                     <li className="nav-item px-3">
-                      <Link className="nav-link text-dark" to="/referralIncome">
+                      <NavLink className={({ isActive, isPending }) =>
+                       isPending ? "nav-link text-dark" : isActive ? "nav-link selected-menu" : "nav-link text-dark"
+                     } to="/referralIncome">
                         Referral Income
-                      </Link>
+                      </NavLink>
                     </li>
                     <li className="nav-item px-3">
-                      <Link
-                        className="nav-link text-dark"
+                      <NavLink
+                        className={({ isActive, isPending }) =>
+                        isPending ? "nav-link text-dark" : isActive ? "nav-link selected-menu" : "nav-link text-dark"
+                      }
                         to="/withdrawHistory"
                       >
                         Withdraw Histroy
-                      </Link>
+                      </NavLink>
                     </li>
                   </>
                 ) : null}
@@ -122,6 +134,7 @@ export const Header = () => {
                         to=""
                         onClick={() => handleLogout()}
                       >
+                        <RiLogoutBoxRFill color="#394CF4"/>
                         Logout
                       </Link>
                     </li>
@@ -141,10 +154,12 @@ export const Header = () => {
                   </>
                 )}
               </ul>
-
-              <div className="position-fixed" style={{ bottom: "0", left: 0, right: 0 }}>
-                <Footer />
-              </div>
+                {
+                  window.innerWidth < 768 ? <div className="position-fixed" style={{ bottom: "0", left: 0, right: 0 }}>
+                  <Footer />
+                </div> : null
+                }
+              
             </div>
           </div>
         </div>

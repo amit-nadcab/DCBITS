@@ -305,7 +305,7 @@ export const Dashboard = () => {
                   <div className="col-md-2 col-6 border-start text-center card-mob">
                     <span className="d-flex align-items-center justify-content-center">
                       <div className="stat-card-dot-o"></div>{" "}
-                      <p className="ms-1"> Total Direct Members</p>
+                      <p className="ms-1">Direct Members</p>
                     </span>
                     <b className="h3">
                       {userStats?.directs ? userStats?.directs : 0}
